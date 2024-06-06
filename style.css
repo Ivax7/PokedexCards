@@ -1,0 +1,272 @@
+@font-face {
+  font-family: 'Pokémon Solid';
+  src: url('/pokemon/Pokemon\ Solid.ttf') format('truetype');
+}
+
+body {
+  background: linear-gradient(135deg, #f3ec78, #000000);
+  background-image: url("https://images5.alphacoders.com/566/thumb-1920-566522.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 370px center;
+  background-color: #d81718;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Pokémon Solid', sans-serif;
+  font-size: 18px;
+}
+
+.article {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  border: 1px solid #000000; /* Rojo Pokéball */
+  border-radius: 15px; /* Bordes redondeados */
+  width: 683px;
+  height: 390px;
+  overflow: hidden;
+  background-color: #FFFFFF; /* Blanco Pikachu */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  z-index: 1; /* Aumenta el z-index */
+  box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
+
+}
+
+
+.nombre {
+  text-align: center;
+  font-size: 24px;
+  line-height: 40px;
+  letter-spacing: 5px;
+  color: #9c0000; /* Rojo Pokéball */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Efecto de sombra */
+  background: beige;
+}
+
+
+.tipo {
+  position: absolute;
+  width: 35px;
+  border-radius: 50%;
+  border: 1px solid white;
+
+  right: 10px;
+  top: -39px;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+  filter: brightness(0.7);
+  z-index: 2;
+}
+
+.dos {
+  right: 50px;
+}
+
+.tipo:hover {
+  filter: brightness(1);
+}
+
+.bio {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 300px;
+  background-color: transparent;
+  border-top: 1px solid #000; /* Borde negro */
+  border-bottom: 1px solid #000; /* Borde negro */
+  justify-content: center;
+  align-items: center;
+}
+
+.gif {
+  height: 100%;
+  width: 400px;
+}
+
+.descripcion {
+  height: 100%;
+  width: 100%;
+  float: right;
+  margin: 10px;
+  letter-spacing: 1px;
+  font-size: 17px;
+}
+
+.numeroPokedex {
+  height: 300px;
+  width: 100%;
+  color: rgba(141, 141, 141, 0.267);
+  position: absolute;
+  font-size: 110px;
+  z-index: 1;
+  text-align: right;
+  padding-right: 90px;
+  letter-spacing: 15px; 
+}
+
+.iconos {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 49px;
+  background-color: #9c0000; /* Rojo Pokéball */
+
+}
+
+.iconos img {
+  width: 35px;
+  height: auto;
+  border-radius: 50%;
+  margin-inline: 15px;
+  border: 2px solid #48d;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+  filter: brightness(0.7);
+}
+
+.iconos img:hover {
+  transform: scale(1.05);
+  filter: brightness(1);
+}
+
+/* Cuando pulsamos en un icono que detecte en evolucion estamos */
+.iconos img.active {
+  filter: brightness(1.1);
+  border: 2px solid #4e8;
+  width: 45px;
+}
+.iconos img.active:hover {
+  transform: scale(1);
+  
+}
+
+.arrow {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  height: 20px;
+  opacity: 0.4;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  font-size: 45px;
+  transition: all .2s ease-in-out;
+  z-index: 2;
+  
+}
+
+.left {
+  transform: rotate(180deg);
+  left: -700px;
+}
+
+.right {
+  right: -700px;
+
+}
+
+.arrow:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.left:hover {
+  transform: scale(1.1) rotate(180deg);
+}
+
+.carta{
+  width: 300px;
+  height: 350px;
+  background-color: rgb(226, 226, 226);
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  z-index: 5;
+  border-radius: 12px;
+  border: 1px solid;
+  overflow: hidden;
+  box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+
+.cabecera{
+  height: 50px;
+  width: auto;
+  background-color: rgb(247, 247, 173);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid;
+}
+
+.tipoSeleccionado{
+  height: 100%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  line-height: 2.3;
+}
+.carta img{
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+.cabecera img{
+  position: absolute;
+  right: 10px;
+}
+
+.contenido {
+  height: auto;
+  flex: 1;
+}
+
+.containerTipos {
+  background-color: rgb(192, 163, 163);
+  height: 145px;
+}
+
+.efectivo {
+  margin-bottom: 10px;
+  background-color: rgb(163, 192, 163);
+}
+.tablaTipos{
+  text-align: center;
+  font-size: 14px;
+  text-decoration: underline;
+  color: green;
+}
+.debil{
+  color: #9c0000;
+}
+
+.iconosTa{
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  height: 60px;
+  align-items: center;
+  justify-content: center;
+}
+
+.tipoTabla {
+  justify-content: center;
+  margin-inline: 5px;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+}
+
+.tipoTabla:hover{
+  transform: scale(1.1);
+}

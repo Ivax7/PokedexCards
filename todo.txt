@@ -1,0 +1,18 @@
+- Buscar imagenes de los tipos y añadirlas al json
+    tipo.style.filter= "brightness(1)";
+- Añadir esto al icono cuando hacemos click: 
+- Arreglar imagenes tipos
+- "Ver debilidades del pokemon" que conjunte los dos tipos que tenga
+- Hacer pestaña tipos dinámica con js implantando el json de tabla de tipos
+- Revisión + comentarios
+
+
+- Mini pestaña al hacer hover por los tipos (agua, planta...) 
+  (por si el user tiene dudas de que tipo es cada imagen)
+
+CONJUNTO
+- 2 flashcard por el lado que se muevan
+- Añadir transiciones
+
+- Añadir api pokemon
+ 

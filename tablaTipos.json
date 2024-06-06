@@ -1,0 +1,112 @@
+{
+  "tipos": [
+    {
+      "nombre": "Normal",
+      "efectivo_contra": [],
+      "debil_contra": ["Lucha"],
+      "logo": "https://i.pinimg.com/564x/c4/91/62/c491621185fa5b18c3995d52a35e61f2.jpg"
+    },
+    {
+      "nombre": "Fuego",
+      "efectivo_contra": ["Planta", "Hielo", "Bicho", "Acero"],
+      "debil_contra": ["Agua", "Tierra", "Roca"],
+      "logo": "https://i.pinimg.com/564x/94/61/ca/9461cae05f959525c16abc4375a78199.jpg"
+    },
+    {
+      "nombre": "Agua",
+      "efectivo_contra": ["Fuego", "Tierra", "Roca"],
+      "debil_contra": ["Eléctrico", "Planta"],
+      "logo": "https://i.pinimg.com/564x/c7/0a/42/c70a42f678011a5ed49ac1926b1f233e.jpg"
+    },
+    {
+      "nombre": "Eléctrico",
+      "efectivo_contra": ["Agua", "Volador"],
+      "debil_contra": ["Tierra"],
+      "logo": "https://i.pinimg.com/564x/3c/dd/17/3cdd17306e51b9ff6c0264241e3e4c4c.jpg"
+    },
+    {
+      "nombre": "Planta",
+      "efectivo_contra": ["Agua", "Tierra", "Roca"],
+      "debil_contra": ["Fuego", "Hielo", "Veneno", "Volador", "Bicho"],
+      "logo": "https://i.pinimg.com/564x/c2/73/b6/c273b6bf305f2c236b1a27535a0e926c.jpg"
+    },
+    {
+      "nombre": "Hielo",
+      "efectivo_contra": ["Planta", "Tierra", "Volador", "Dragón"],
+      "debil_contra": ["Fuego", "Lucha", "Roca", "Acero"],
+      "logo": "https://i.pinimg.com/564x/d2/18/3f/d2183f02d49a56be91405157bf506751.jpg"
+    },
+    {
+      "nombre": "Lucha",
+      "efectivo_contra": ["Normal", "Hielo", "Roca", "Siniestro", "Acero"],
+      "debil_contra": ["Volador", "Psíquico", "Hada"],
+      "logo": "https://static.wikia.nocookie.net/espokemon/images/f/f9/Tipo_lucha.png/revision/latest/scale-to-width-down/18?cb=20221120233451"
+    },
+    {
+      "nombre": "Veneno",
+      "efectivo_contra": ["Planta", "Hada"],
+      "debil_contra": ["Tierra", "Psíquico"],
+      "logo": "https://i.pinimg.com/564x/7a/e8/eb/7ae8ebc9bfe255b3183498db770aecfd.jpg"
+    },
+    {
+      "nombre": "Tierra",
+      "efectivo_contra": ["Fuego", "Eléctrico", "Veneno", "Roca", "Acero"],
+      "debil_contra": ["Agua", "Planta", "Hielo"],
+      "logo": "https://static.wikia.nocookie.net/espokemon/images/7/7d/Tipo_tierra.png/revision/latest/scale-to-width-down/18?cb=20221120233448"
+    },
+    {
+      "nombre": "Volador",
+      "efectivo_contra": ["Planta", "Lucha", "Bicho"],
+      "debil_contra": ["Eléctrico", "Hielo", "Roca"],
+      "logo": "https://i.pinimg.com/564x/d6/4e/c9/d64ec94e1999b75dcec3daa6ed0fb1fa.jpg"
+    },
+    {
+      "nombre": "Psíquico",
+      "efectivo_contra": ["Lucha", "Veneno"],
+      "debil_contra": ["Bicho", "Fantasma", "Siniestro"],
+      "logo": "https://static.wikia.nocookie.net/espokemon/images/f/f5/Tipo_ps%C3%ADquico.png/revision/latest/scale-to-width-down/18?cb=20221120233438"
+    },
+    {
+      "nombre": "Bicho",
+      "efectivo_contra": ["Planta", "Psíquico", "Siniestro"],
+      "debil_contra": ["Fuego", "Volador", "Roca"],
+      "logo": "https://static.wikia.nocookie.net/espokemon/images/6/6e/Tipo_bicho.png/revision/latest/scale-to-width-down/18?cb=20221120233446"
+    },
+    {
+      "nombre": "Roca",
+      "efectivo_contra": ["Fuego", "Hielo", "Volador", "Bicho"],
+      "debil_contra": ["Agua", "Planta", "Lucha", "Tierra", "Acero"],
+      "logo": "https://static.wikia.nocookie.net/espokemon/images/7/7d/Tipo_tierra.png/revision/latest/scale-to-width-down/18?cb=20221120233448"
+    },
+    {
+      "nombre": "Fantasma",
+      "efectivo_contra": ["Psíquico", "Fantasma"],
+      "debil_contra": ["Fantasma", "Siniestro"],
+      "logo": "https://i.pinimg.com/564x/8f/21/e5/8f21e5fdd6493cc4c43d2aa495b4d0cb.jpg"
+    },
+    {
+      "nombre": "Dragón",
+      "efectivo_contra": ["Dragón"],
+      "debil_contra": ["Hielo", "Dragón", "Hada"],
+      "logo": "https://static.wikia.nocookie.net/espokemon/images/c/cb/Tipo_drag%C3%B3n.png/revision/latest/scale-to-width-down/18?cb=20221120233436"
+    },
+    {
+      "nombre": "Siniestro",
+      "efectivo_contra": ["Psíquico", "Fantasma"],
+      "debil_contra": ["Lucha", "Bicho", "Hada"],
+      "logo": "https://i.pinimg.com/564x/40/71/34/407134500ffdc589b19dff1f88fe8c28.jpg"
+    },
+    {
+      "nombre": "Acero",
+      "efectivo_contra": ["Hielo", "Roca", "Hada"],
+      "debil_contra": ["Fuego", "Lucha", "Tierra"],
+      "logo": "https://i.pinimg.com/564x/b8/05/8f/b8058f5c2ba7189a8f076cabe5df83ad.jpg"
+    },
+    {
+      "nombre": "Hada",
+      "efectivo_contra": ["Lucha", "Dragón", "Siniestro"],
+      "debil_contra": ["Veneno", "Acero"],
+      "logo": "https://static.wikia.nocookie.net/espokemon/images/5/59/Tipo_hada.png/revision/latest/scale-to-width-down/18?cb=20221120233433"
+    }
+  ]
+}
