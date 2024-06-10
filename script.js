@@ -6,7 +6,6 @@ const right = document.querySelector(".right");
 const left = document.querySelector(".left");
 const carta = document.querySelector(".carta");
 let currentIndex = 0; // índice actual del array
-
 let pokemons;
 
 // Función para actualizar la información de los tipos
@@ -30,21 +29,47 @@ const updateTipoInfo = (tipo, tipos) => {
   tipo.efectivo_contra.forEach(nombreTipo => {
     const tipoInfo = tipos.find(t => t.nombre === nombreTipo);
     if (tipoInfo) {
-      const icono = document.createElement('img');
-      icono.className = "tipoTabla efectividad";
-      icono.src = tipoInfo.logo;
-      iconosEfectivo.appendChild(icono);
+    // Crear etiqueta de tipo efectivo
+    const iconoEfectivo = document.createElement('div');
+    iconoEfectivo.className = "tipoTabla efectividad";
+
+    // Crear imagen del tipo efectivo
+    const imgEfectivo = document.createElement('img');
+    imgEfectivo.src = tipoInfo.logo;
+    iconoEfectivo.appendChild(imgEfectivo);
+
+    // Crear texto del tipo efectivo
+    const textoEfectivo = document.createElement('span');
+    textoEfectivo.className = "etiqueta"
+    textoEfectivo.textContent = tipoInfo.nombre;
+    iconoEfectivo.appendChild(textoEfectivo);
+    
+    // Agregar etiqueta de tipo efectivo a la carta
+    iconosEfectivo.appendChild(iconoEfectivo);
     }
   });
-
-  // Mostrar las debilidades
+    
+    // Mostrar las debilidades
   tipo.debil_contra.forEach(nombreTipo => {
     const tipoInfo = tipos.find(t => t.nombre === nombreTipo);
     if (tipoInfo) {
-      const icono = document.createElement('img');
-      icono.className = "tipoTabla debilidad";
-      icono.src = tipoInfo.logo;
-      iconosDebilidad.appendChild(icono);
+    // Crear etiqueta de tipo débil
+    const iconoDebil = document.createElement('div');
+    iconoDebil.className = "tipoTabla debilidad";
+    
+    // Crear imagen del tipo débil
+    const imgDebil = document.createElement('img');
+    imgDebil.src = tipoInfo.logo;
+    iconoDebil.appendChild(imgDebil);
+    
+    // Crear texto del tipo débil
+    const textoDebil = document.createElement('span');
+    textoDebil.textContent = tipoInfo.nombre;
+    textoDebil.className = "etiqueta"
+    iconoDebil.appendChild(textoDebil);
+    
+    // Agregar etiqueta de tipo débil a la carta
+    iconosDebilidad.appendChild(iconoDebil);
     }
   });
 };
@@ -61,6 +86,7 @@ const updateTipoInfoByElement = (tipoElemento, tipos) => {
     console.log("No se encontró ningún tipo con ese nombre.");
   }
 };
+
 
 // Llamamos al JSON con la información de la pokedex
 fetch('infoPokemon.json')
@@ -92,10 +118,12 @@ fetch('infoPokemon.json')
           tipo.dataset.tipo = pokemons[currentIndex].tipoNombre1; // Agregar data-tipo
           section.appendChild(tipo);
           tipo.src = pokemons[currentIndex].tipo;
+
           tipo.addEventListener('click', (e) => {
             e.stopPropagation();
             updateTipoInfoByElement(tipo, tipos);
             carta.style.display = "block";
+            setTipoBrilloActivo(tipo);
           });
 
           // Creamos el primer nPokedex (3)
@@ -151,13 +179,14 @@ fetch('infoPokemon.json')
             section.appendChild(tipo2);
             tipo2.src = pokemons[index].tipo2;
 
-            tipo2.addEventListener('click', (e) => {
+            tipo2
+            .addEventListener('click', (e) => {
               e.stopPropagation();
               updateTipoInfoByElement(tipo2, tipos);
               carta.style.display = "block";
+              setTipoBrilloActivo(tipo2);
             });
           }
-
           // Actualizamos la clase activa de los iconos
           const iconos = document.querySelectorAll('.icono');
           iconos.forEach((icon, idx) => {
@@ -216,8 +245,23 @@ fetch('infoPokemon.json')
         document.addEventListener('click', (e) => {
           if (!carta.contains(e.target) && !e.target.classList.contains('tipo')) {
             carta.style.display = "none";
+            // Devolvemos el brillo al icono del tipo
+            const tipos = document.querySelectorAll('.tipo');
+            tipos.forEach(tipo => {
+              tipo.style.filter = "brightness(0.75)";
+            });
           }
         });
 
+        const setTipoBrilloActivo = (tipoActivo) => {
+          const tipos = document.querySelectorAll(".tipo");
+          tipos.forEach(tipo => {
+            if(tipo === tipoActivo){
+              tipo.style.filter = "brightness(1)";
+            } else {
+              tipo.style.filter = "brightness(0.75)";
+            }
+          });
+        }
       });
   });

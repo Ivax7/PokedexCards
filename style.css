@@ -42,7 +42,6 @@ body {
 
 }
 
-
 .nombre {
   text-align: center;
   font-size: 24px;
@@ -53,18 +52,16 @@ body {
   background: beige;
 }
 
-
 .tipo {
   position: absolute;
   width: 35px;
   border-radius: 50%;
   border: 1px solid white;
-
   right: 10px;
   top: -39px;
   cursor: pointer;
   transition: all .2s ease-in-out;
-  filter: brightness(0.7);
+  filter: brightness(0.75);
   z-index: 2;
 }
 
@@ -110,7 +107,7 @@ body {
   font-size: 110px;
   z-index: 1;
   text-align: right;
-  padding-right: 90px;
+  padding-right: 65px;
   letter-spacing: 15px; 
 }
 
@@ -261,12 +258,44 @@ body {
 }
 
 .tipoTabla {
+  position: relative;
   justify-content: center;
   margin-inline: 5px;
   cursor: pointer;
   transition: all .2s ease-in-out;
+  height: 40px;
 }
 
 .tipoTabla:hover{
   transform: scale(1.1);
+}
+
+.tipoTabla:hover .etiqueta{
+  display: block;
+}
+
+.etiqueta {
+  display: none;
+  position: absolute;
+  top: calc(100% + 7px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px;
+  border-radius: 3px;
+  font-size: 8px;
+  font-family:'Lucida Sans';
+  font-weight: 600;
+  z-index: 1;
+  background-color: rgba(230, 230, 230, 0.8);
+  color: rgb(131, 137, 216);
+  box-shadow: 2px 2px rgba(0, 0, 0, 0.1);
+}
+.etiqueta::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  border: 5px solid transparent;
+  border-bottom-color: rgba(230, 230, 230, 0.8);
+  transform: translateX(-50%);
 }
