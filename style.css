@@ -62,16 +62,33 @@ body {
   cursor: pointer;
   transition: all .2s ease-in-out;
   filter: brightness(0.75);
-  z-index: 2;
-}
+  z-index: 5;
+  }
 
 .dos {
   right: 50px;
+  z-index: 6;
 }
 
-.tipo:hover {
-  filter: brightness(1);
+.verEfectividad {
+  display: block;
+  position: absolute;
+  font-size: 12px;
+  background-color: #f0c040; /* Amarillo Pikachu */
+  border: none;
+  padding-inline: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  z-index: 5;
+  bottom: 8px;
+  right: 10px;
 }
+
+.verEfectividad:hover {
+  background-color: #f0a020; /* Amarillo más oscuro */
+}
+
 
 .bio {
   position: relative;
@@ -125,11 +142,12 @@ body {
   width: 35px;
   height: auto;
   border-radius: 50%;
-  margin-inline: 15px;
+  margin-inline: 25px;
   border: 2px solid #48d;
   cursor: pointer;
   transition: all .2s ease-in-out;
   filter: brightness(0.7);
+  z-index: 2;
 }
 
 .iconos img:hover {
@@ -157,10 +175,21 @@ body {
   cursor: pointer;
   width: 50px;
   height: 50px;
-  font-size: 45px;
   transition: all .2s ease-in-out;
   z-index: 2;
-  
+}
+
+.arrow::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 25px solid white;
+  transform: translateY(-50%);
 }
 
 .left {
@@ -298,4 +327,80 @@ body {
   border: 5px solid transparent;
   border-bottom-color: rgba(230, 230, 230, 0.8);
   transform: translateX(-50%);
+}
+
+
+/* Estilos para los niveles de las evoluciones */
+.flechaNvl {
+  position: absolute;
+  width: 30%;
+  height: 14px;
+  background-color: #a5b9cf; /* Color de fondo */
+  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 360px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.textNvl {
+  z-index: 9999;
+  position: absolute;
+  left: 52px;
+  color: rgb(0, 0, 0); /* Color del texto */
+  font-size: 8px;
+  
+}
+
+.segundaEvo{
+  left: 135px;
+}
+
+
+/* Tabla de tipos*/
+.efectividad {
+  height: 370px;
+  width: 650px;
+  background-color: beige;
+  z-index: 10;
+  border: 1px solid gray;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.titulo {
+  background-color: #9c0000;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  font-weight: lighter;
+  letter-spacing: 0.15rem;
+}
+.grid-container {
+  width: 100%; /* Ancho completo del contenedor de la tabla */
+  border-collapse: collapse; /* Colapso de los bordes de la tabla */
+}
+
+.padre {
+  background-color: #f0f0f0; /* Color de fondo de las celdas de los elementos padre */
+  padding: 0; /* Eliminamos el espacio interno */
+  border: 1px solid #ccc; /* Borde de las celdas de los elementos padre */
+}
+
+.padre img {
+  display: block; /* Para evitar espacios debajo de la imagen */
+  max-width: 16px; /* Ancho máximo de la imagen */
+  height: auto; /* Altura automática para mantener la proporción */
+  margin: auto; /* Centrar horizontalmente */
+  vertical-align: middle; /* Centrar verticalmente */
+}
+
+
+
+.hijo {
+  background-color: #fff; /* Color de fondo de las celdas de los elementos hijo */
+  text-align: center; /* Alineación del texto de los elementos hijo */
+  padding: 10px; /* Espaciado interno de las celdas de los elementos hijo */
+  border: 1px solid #ccc; /* Borde de las celdas de los elementos hijo */
 }

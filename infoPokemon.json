@@ -8,7 +8,8 @@
     "tipoNombre1": "Fuego",
     "tipoNombre2": "",
     "img": "https://i.pinimg.com/originals/b5/13/28/b51328854f9214688f594d76b7a45a49.gif",
-    "icono": "https://i.pinimg.com/564x/e7/38/25/e738252e4e1a2f964aea11fe9cf3d54f.jpg"
+    "icono": "https://i.pinimg.com/564x/e7/38/25/e738252e4e1a2f964aea11fe9cf3d54f.jpg",
+    "nvlEvolucion": "16"    
   },
   
   {
@@ -20,7 +21,9 @@
     "tipoNombre2": "",
     "descripcion": "Cuando mueve su cola ardiente, eleva la temperatura a niveles insoportablemente altos.",
     "img": "https://i.pinimg.com/originals/67/b9/82/67b98209c91dbb8d85e4e76a3700c6c7.gif",
-    "icono": "https://i.pinimg.com/564x/99/e4/82/99e4825db80494e92a6257fe7325e329.jpg"
+    "icono": "https://i.pinimg.com/564x/99/e4/82/99e4825db80494e92a6257fe7325e329.jpg",
+    "nvlEvolucion": "36"    
+  
   },
   
   {
@@ -32,6 +35,7 @@
     "tipoNombre2": "Volador",
     "descripcion": "Escupe fuego lo suficientemente caliente como para derretir rocas. Se sabe que causa incendios forestales sin querer.",
     "img": "https://i.pinimg.com/originals/18/fe/ed/18feedf7632bebc2d1b1797e0bdbefe0.gif",
-    "icono": "https://i.pinimg.com/564x/d4/dd/ff/d4ddff4623a498f548e35cad28f7abda.jpg"
+    "icono": "https://i.pinimg.com/564x/d4/dd/ff/d4ddff4623a498f548e35cad28f7abda.jpg",
+    "nvlEvolucion": ""    
   }
 ]

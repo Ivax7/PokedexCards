@@ -1,11 +1,15 @@
+TABLA DE TIPOS
+  - Añadir imagen en primera casilla creada con canvas
+  - Crearla con un bucle js
+  - Añadir los iconos de los tipos con js
+  - Añadirle la funcionalidad interna
+  - Añadir evento para cerrarla
+  - Comprobar su uso
+
 
 - Arreglar imagenes tipos
-  - "Ver debilidades del pokemon" que conjunte los dos tipos que tenga
   - Revisión + comentarios
-
-
-- Mini pestaña al hacer hover por los tipos (agua, planta...) 
-  (por si el user tiene dudas de que tipo es cada imagen)
+  - "Ver debilidades del pokemon" que conjunte los dos tipos que tenga
 
 CONJUNTO
 - Crear la página principal de "Pokedex" pero por las primeras versiones, al hacer click redirecciona a esta pestaña
