@@ -8,6 +8,9 @@ const carta = document.querySelector(".carta");
 let currentIndex = 0; // índice actual del array
 let pokemons;
 
+
+
+
 // Función para actualizar la información de los tipos
 const updateTipoInfo = (tipo, tipos) => {
   const tipoSeleccionado = carta.querySelector('.tipoSeleccionado');
@@ -92,7 +95,7 @@ const updateTipoInfoByElement = (tipoElemento, tipos) => {
 fetch('infoPokemon.json')
   .then(response => response.json())
   .then(data => {
-    pokemons = data;
+    const pokemons = data;
 
     // Llamamos al JSON con la información de los tipos
     fetch('tablaTipos.json')
@@ -263,5 +266,89 @@ fetch('infoPokemon.json')
             }
           });
         }
+
+
+        // Añadimos el btn y la tabla
+        verEfectividadBtn = document.querySelector(".verEfectividad");
+        tablaTiposEfectividad = document.querySelector(".tablaTiposEfectividad");
+        
+        // Creamos el evento para que se muestre la tabla de tipos
+        verEfectividadBtn.addEventListener("click", () => {
+          tablaTiposEfectividad.style.display = "block";
+
+          // Obtenemos el tipo del pokemon actual
+          const tipoPokemon1 = pokemons[currentIndex].tipoNombre1;
+          const tipoPokemon2 = pokemons[currentIndex].tipoNombre2;
+
+          // Resaltamos el tipo del pokemon actual en la tabla de tipos
+          const tipoCells = document.querySelectorAll('.grid-container .iconoTabla');
+          tipoCells.forEach(cell => {
+            const tipo = cell.dataset.tipo
+            if (tipo === tipoPokemon1 || tipo === tipoPokemon2) {
+              cell.style.filter = "brightness(1)";
+            } else {
+              cell.style.filter = "brightness(0.6)";
+            }
+
+          })
+        })
+
+        // Creamos el evento para cerrar la tabla si se pulsa fuera de ella
+        document.addEventListener("click", (event) => {
+        // Comprobamos si el clic se hizo fuera de la tabla y del botón
+        const isClickInsideTabla = tablaTiposEfectividad.contains(event.target);
+        const isClickInsideBtn = verEfectividadBtn.contains(event.target);
+
+       // Si el clic se hizo fuera de la tabla y del botón, ocultamos la tabla
+        if (!isClickInsideTabla && !isClickInsideBtn) {
+          tablaTiposEfectividad.style.display = "none";
+          }
+        });
+
+
+        // Creamos los elementos padre columna de la tabla de tipos
+        let cabecerasColumna = document.querySelector(".headers");
+        for(let i = 0; i < 18; i++){
+          const headerTipoColumna = document.createElement("th");
+          headerTipoColumna.classList.add("padre", "columna");
+          const imagenTipoColumna = document.createElement("img");
+          imagenTipoColumna.className = "iconoTabla";
+          imagenTipoColumna.src = `${tipos[i].logo}`;
+          imagenTipoColumna.dataset.tipo = tipos[i].nombre; // Añadimos un dataset para identificar el tipo
+          headerTipoColumna.appendChild(imagenTipoColumna);
+          cabecerasColumna.appendChild(headerTipoColumna);
+        }
+
+        // Creamos los elementos padre fila de la tabla de tipos
+        let body = document.querySelector(".body");
+        for (let i = 0; i < 18; i++) {
+          const tr = document.createElement("tr");
+          const headerTipoFila = document.createElement("th");
+          headerTipoFila.className = "padre";
+          const imagenTipoFila = document.createElement("img");
+          imagenTipoFila.className = "iconoTabla";
+          imagenTipoFila.src = `${tipos[i].logo}`;
+          imagenTipoFila.dataset.tipo = tipos[i].nombre; // Añadimos un dataset para identificar el tipo
+          headerTipoFila.appendChild(imagenTipoFila);
+          tr.appendChild(headerTipoFila);
+        
+          // Añadimos celdas vacías para completar la cuadrícula
+          for (let j = 0; j < 18; j++) {
+            const td = document.createElement("td");
+            td.className = "celdaVacia";
+            // Verificamos si el tipo de ataque es efectivo o no efectivo contra el tipo de Pokémon
+            const tipoAtaque = tipos[i].nombre; // coje el tipo fuego
+            if (tipos[j].efectivo_contra.includes(tipoAtaque)) { // vuelve a hacer un loop por los tipos y los que encuentra en el array les da el estilo de efectivo o debil
+              td.classList.add("efectivo");
+            } else if (tipos[j].debil_contra.includes(tipoAtaque)) {
+              td.classList.add("noEfectivo");
+            }
+          
+            tr.appendChild(td);
+          }
+          body.appendChild(tr);
+        }
+
+
       });
   });

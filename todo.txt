@@ -1,21 +1,24 @@
-TABLA DE TIPOS
-  - Añadir imagen en primera casilla creada con canvas
-  - Crearla con un bucle js
-  - Añadir los iconos de los tipos con js
-  - Añadirle la funcionalidad interna
-  - Añadir evento para cerrarla
-  - Comprobar su uso
+Miercoles 12/06:
 
+  TABLA DE TIPOS
+    - AÑADIR EL CONTENIDO DE CADA CELDA NO DINÁMICAMENTE PUES LA TABLA DE TIPOS SIEMPRE ES IGUAL
+    - Marcar en brillante toda la fila que coincida con el tipo para ver lo importante de este tipo
+    - Añadir un background rojo a las debilidades y un background verde a las efectivas y una X a las que no afectan sus ataques
+    - Corregir la tabla de tipos(que volador sea débil al eléctrico no significa que los ataques aereos hagan menos daño al electrico, o si?)
+    - Añadir la variable de que el ataque no afecte
+    - Añadirle la funcionalidad interna, simplemente que sea una tabla de tipos con los tipos del pokemon marcados
+    - Comprobar su uso
+  - Crear una etiqueta nueva que sea: ver debilidades del pokemon: (preguntar al chatGPT como hacer la lógica)
 
-- Arreglar imagenes tipos
-  - Revisión + comentarios
-  - "Ver debilidades del pokemon" que conjunte los dos tipos que tenga
+------------------
+- Aumentar el tamaño de todo
+- Depuración código basura en "css"
+- Revisión + comentarios
 
 CONJUNTO
 - Crear la página principal de "Pokedex" pero por las primeras versiones, al hacer click redirecciona a esta pestaña
   - Agregar el efecto hover star wars y que aparezca otra imagen del pokemon por encima ("Ver información")
 - 2 flashcard por el lado que se muevan
 - Añadir transiciones
-
 - Añadir api pokemon
  

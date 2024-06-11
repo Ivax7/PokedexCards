@@ -360,7 +360,7 @@ body {
 
 
 /* Tabla de tipos*/
-.efectividad {
+.tablaTiposEfectividad {
   height: 370px;
   width: 650px;
   background-color: beige;
@@ -368,6 +368,7 @@ body {
   border: 1px solid gray;
   border-radius: 12px;
   overflow: hidden;
+  display: none;
 }
 
 .titulo {
@@ -376,16 +377,18 @@ body {
   color: rgb(255, 255, 255);
   font-weight: lighter;
   letter-spacing: 0.15rem;
+  height: 45px;
 }
+
 .grid-container {
   width: 100%; /* Ancho completo del contenedor de la tabla */
   border-collapse: collapse; /* Colapso de los bordes de la tabla */
 }
 
 .padre {
-  background-color: #f0f0f0; /* Color de fondo de las celdas de los elementos padre */
+  background-color: #e4e3e3; /* Color de fondo de las celdas de los elementos padre */
   padding: 0; /* Eliminamos el espacio interno */
-  border: 1px solid #ccc; /* Borde de las celdas de los elementos padre */
+  border: 1px solid #414141; /* Borde de las celdas de los elementos padre */
 }
 
 .padre img {
@@ -393,14 +396,48 @@ body {
   max-width: 16px; /* Ancho máximo de la imagen */
   height: auto; /* Altura automática para mantener la proporción */
   margin: auto; /* Centrar horizontalmente */
-  vertical-align: middle; /* Centrar verticalmente */
 }
-
-
 
 .hijo {
   background-color: #fff; /* Color de fondo de las celdas de los elementos hijo */
   text-align: center; /* Alineación del texto de los elementos hijo */
   padding: 10px; /* Espaciado interno de las celdas de los elementos hijo */
   border: 1px solid #ccc; /* Borde de las celdas de los elementos hijo */
+}
+
+.esquina {
+  position: relative;
+  background: linear-gradient(to bottom left, transparent 49.5%, black 49.5%, black 50.5%, transparent 50.5%); /* Degradado diagonal */
+  color: rgb(0, 0, 0); /* Color del texto */
+  border: 1px solid black; /* Borde */
+}
+
+.esquina span {
+  position: absolute;
+  font-size: 10px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.defensaEsquina{
+  left: 8px;
+  top: 5px;
+}
+
+.ataqueEsquina{
+  left: 20px;
+  top: 0px;
+}
+
+.celdaVacia{
+  background-color: #f0f0f0; /* Color de fondo de las celdas de los elementos padre */
+  border: 1px solid #ccc; /* Borde de las celdas de los elementos padre */
+
+}
+
+.efectivo {
+  background-color: #4e8;
+}
+
+.noEfectivo {
+  background-color: #ee4444;
 }
