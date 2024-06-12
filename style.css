@@ -259,20 +259,22 @@ body {
 }
 
 .containerTipos {
-  background-color: rgb(192, 163, 163);
+  background-color: rgb(187, 132, 132);
   height: 145px;
 }
 
 .efectivo {
   margin-bottom: 10px;
-  background-color: rgb(163, 192, 163);
+  background-color: rgb(132, 187, 146);
 }
+
 .tablaTipos{
   text-align: center;
   font-size: 14px;
   text-decoration: underline;
   color: green;
 }
+
 .debil{
   color: #9c0000;
 }
@@ -361,13 +363,15 @@ body {
 
 /* Tabla de tipos*/
 .tablaTiposEfectividad {
-  height: 370px;
+  position: relative;
+  height: auto;
   width: 650px;
   background-color: beige;
   z-index: 10;
   border: 1px solid gray;
   border-radius: 12px;
   overflow: hidden;
+  background: #000;
   display: none;
 }
 
@@ -377,12 +381,14 @@ body {
   color: rgb(255, 255, 255);
   font-weight: lighter;
   letter-spacing: 0.15rem;
-  height: 45px;
 }
 
 .grid-container {
-  width: 100%; /* Ancho completo del contenedor de la tabla */
+  position: relative;
+  width: 96.9%; /* Ancho completo del contenedor de la tabla */
   border-collapse: collapse; /* Colapso de los bordes de la tabla */
+  float: right;
+  margin-top: 20px;
 }
 
 .padre {
@@ -406,38 +412,63 @@ body {
 }
 
 .esquina {
-  position: relative;
-  background: linear-gradient(to bottom left, transparent 49.5%, black 49.5%, black 50.5%, transparent 50.5%); /* Degradado diagonal */
-  color: rgb(0, 0, 0); /* Color del texto */
+  background: #000;
   border: 1px solid black; /* Borde */
-}
-
-.esquina span {
-  position: absolute;
-  font-size: 10px;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
-.defensaEsquina{
-  left: 8px;
-  top: 5px;
-}
-
-.ataqueEsquina{
-  left: 20px;
-  top: 0px;
 }
 
 .celdaVacia{
   background-color: #f0f0f0; /* Color de fondo de las celdas de los elementos padre */
   border: 1px solid #ccc; /* Borde de las celdas de los elementos padre */
-
+  font-size: 6px;
+  text-align: center;
+  filter: brightness(0.8);
 }
 
-.efectivo {
+.celdaVacia.resaltada, .celdaVacia.resaltada-fila {
+  filter: brightness(1);
+}
+
+.muy-eficaz {
   background-color: #4e8;
 }
 
-.noEfectivo {
+.poco-eficaz {
   background-color: #ee4444;
+}
+
+.inefectivo {
+  background-color: rgb(187, 187, 187);
+}
+
+.vertical-header{
+  position: absolute;
+  width: 20px;
+  height: 100%;
+  left: -20px;
+  bottom: 0px;
+  float: left;
+  background-color: rgb(169, 194, 140);
+  text-orientation: upright; /* Esto asegura que el texto esté en posición vertical */
+  writing-mode: vertical-rl; /* Esto hará que el texto se escriba de arriba hacia abajo */
+  white-space: nowrap;
+  font-size: 10px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.horizontal-header{
+  position: absolute;
+  width: 103.2%;
+  height: 20px;
+  right: 0;
+  top: -20px;
+  background-color: rgb(228, 191, 157);
+  font-size: 10px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }

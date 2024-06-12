@@ -1,13 +1,9 @@
 Miercoles 12/06:
 
   TABLA DE TIPOS
-    - AÑADIR EL CONTENIDO DE CADA CELDA NO DINÁMICAMENTE PUES LA TABLA DE TIPOS SIEMPRE ES IGUAL
     - Marcar en brillante toda la fila que coincida con el tipo para ver lo importante de este tipo
-    - Añadir un background rojo a las debilidades y un background verde a las efectivas y una X a las que no afectan sus ataques
-    - Corregir la tabla de tipos(que volador sea débil al eléctrico no significa que los ataques aereos hagan menos daño al electrico, o si?)
-    - Añadir la variable de que el ataque no afecte
-    - Añadirle la funcionalidad interna, simplemente que sea una tabla de tipos con los tipos del pokemon marcados
-    - Comprobar su uso
+    - Hacer click en los iconos y que se marque toda la fila o la columna
+
   - Crear una etiqueta nueva que sea: ver debilidades del pokemon: (preguntar al chatGPT como hacer la lógica)
 
 ------------------

@@ -275,31 +275,70 @@ fetch('infoPokemon.json')
         // Creamos el evento para que se muestre la tabla de tipos
         verEfectividadBtn.addEventListener("click", () => {
           tablaTiposEfectividad.style.display = "block";
-
-          // Obtenemos el tipo del pokemon actual
-          const tipoPokemon1 = pokemons[currentIndex].tipoNombre1;
-          const tipoPokemon2 = pokemons[currentIndex].tipoNombre2;
-
-          // Resaltamos el tipo del pokemon actual en la tabla de tipos
-          const tipoCells = document.querySelectorAll('.grid-container .iconoTabla');
-          tipoCells.forEach(cell => {
-            const tipo = cell.dataset.tipo
-            if (tipo === tipoPokemon1 || tipo === tipoPokemon2) {
+        
+        // Obtenemos el tipo del pokemon actual
+        const tipoPokemon1 = pokemons[currentIndex].tipoNombre1;
+        const tipoPokemon2 = pokemons[currentIndex].tipoNombre2;
+      
+        // Resaltamos el tipo del pokemon actual en la tabla de tipos
+        const tipoCells = document.querySelectorAll('.grid-container .iconoTabla');
+        tipoCells.forEach(cell => {
+          const tipo = cell.dataset.tipo;
+          if (tipo === tipoPokemon1 || tipo === tipoPokemon2) {
               cell.style.filter = "brightness(1)";
-            } else {
+          } else {
               cell.style.filter = "brightness(0.6)";
+          }
+        });
+      
+        // Resaltar las celdas correspondientes al tipo del Pokémon actual
+        const celdasVacias = document.querySelectorAll('.celdaVacia');
+        celdasVacias.forEach(celda => {
+          const tipo = celda.dataset.tipo;
+          if (tipo === tipoPokemon1 || tipo === tipoPokemon2) {
+              celda.classList.add('resaltada');
+          } else {
+              celda.classList.remove('resaltada');
+          }
+        });
+        
+        // Resaltar la fila correspondiente al tipo del Pokémon actual
+        const filas = document.querySelectorAll('.grid-container tbody tr');
+        filas.forEach(fila => {
+          const tipoFila = fila.querySelector('.iconoTabla').dataset.tipo;
+          if (tipoFila === tipoPokemon1 || tipoFila === tipoPokemon2) {
+              fila.querySelectorAll('.celdaVacia').forEach(celda => {
+                  celda.classList.add('resaltada-fila');
+              });
+          } else {
+              fila.querySelectorAll('.celdaVacia').forEach(celda => {
+                  celda.classList.remove('resaltada-fila');
+              });
+          }
+        });
+        
+        
+        
+        // Resaltar la columna correspondiente al tipo del Pokémon actual
+        const columnas = document.querySelectorAll('.grid-container thead th');
+        columnas.forEach(columna => {
+            const tipoColumna = columna.querySelector('.iconoTabla').dataset.tipo;
+            if (tipoColumna === tipoPokemon1 || tipoColumna === tipoPokemon2) {
+                columna.classList.add('resaltada-columna');
+            } else {
+                columna.classList.remove('resaltada-columna');
             }
-
-          })
-        })
-
+        });
+      });
+        
+        
         // Creamos el evento para cerrar la tabla si se pulsa fuera de ella
         document.addEventListener("click", (event) => {
         // Comprobamos si el clic se hizo fuera de la tabla y del botón
         const isClickInsideTabla = tablaTiposEfectividad.contains(event.target);
         const isClickInsideBtn = verEfectividadBtn.contains(event.target);
 
-       // Si el clic se hizo fuera de la tabla y del botón, ocultamos la tabla
+        // Si el clic se hizo fuera de la tabla y del botón, ocultamos la tabla
         if (!isClickInsideTabla && !isClickInsideBtn) {
           tablaTiposEfectividad.style.display = "none";
           }
@@ -319,36 +358,48 @@ fetch('infoPokemon.json')
           cabecerasColumna.appendChild(headerTipoColumna);
         }
 
-        // Creamos los elementos padre fila de la tabla de tipos
+        // Crear las filas
         let body = document.querySelector(".body");
-        for (let i = 0; i < 18; i++) {
+        for (let i = 0; i < tipos.length; i++) {
           const tr = document.createElement("tr");
+          
+          // Crear y añadir el encabezado de la fila
           const headerTipoFila = document.createElement("th");
-          headerTipoFila.className = "padre";
           const imagenTipoFila = document.createElement("img");
+          headerTipoFila.className = "padre";
           imagenTipoFila.className = "iconoTabla";
-          imagenTipoFila.src = `${tipos[i].logo}`;
-          imagenTipoFila.dataset.tipo = tipos[i].nombre; // Añadimos un dataset para identificar el tipo
+          imagenTipoFila.src = tipos[i].logo;
+          imagenTipoFila.dataset.tipo = tipos[i].nombre;
           headerTipoFila.appendChild(imagenTipoFila);
           tr.appendChild(headerTipoFila);
-        
-          // Añadimos celdas vacías para completar la cuadrícula
-          for (let j = 0; j < 18; j++) {
-            const td = document.createElement("td");
-            td.className = "celdaVacia";
-            // Verificamos si el tipo de ataque es efectivo o no efectivo contra el tipo de Pokémon
-            const tipoAtaque = tipos[i].nombre; // coje el tipo fuego
-            if (tipos[j].efectivo_contra.includes(tipoAtaque)) { // vuelve a hacer un loop por los tipos y los que encuentra en el array les da el estilo de efectivo o debil
-              td.classList.add("efectivo");
-            } else if (tipos[j].debil_contra.includes(tipoAtaque)) {
-              td.classList.add("noEfectivo");
-            }
           
+          // Añadir celdas con datos de efectividad
+          for (let j = 0; j < tipos.length; j++) {
+            const td = document.createElement("td");
+            let efectividad = "-";
+
+            if (tipos[i].efectivo_contra.includes(tipos[j].nombre)) {
+              td.className = "muy-eficaz";
+              efectividad = "x2";
+            } else if (tipos[i].poco_eficaz.includes(tipos[j].nombre)) {
+              td.className = "poco-eficaz";
+              efectividad = "x0.5";
+            } else if (tipos[i].inefectivo_contra && tipos[i].inefectivo_contra.includes(tipos[j].nombre)) {
+              td.className = "inefectivo";
+              efectividad = "x0";
+            }
+            
+            td.classList.add("celdaVacia");
+            td.textContent = efectividad;
+            td.dataset.tipo = tipos[j].nombre; // Aquí asignamos el atributo data-tipo
             tr.appendChild(td);
           }
+          
           body.appendChild(tr);
         }
 
 
       });
   });
+
+

@@ -1,112 +1,149 @@
 {
   "tipos": [
     {
-      "nombre": "Normal",
-      "efectivo_contra": [],
-      "debil_contra": ["Lucha"],
-      "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/e/e0/latest/20210602131449/Tipo_normal_GO.png"
-    },
-    {
-      "nombre": "Fuego",
-      "efectivo_contra": ["Planta", "Hielo", "Bicho", "Acero"],
-      "debil_contra": ["Agua", "Tierra", "Roca"],
-      "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/7/7e/latest/20210602132335/Tipo_fuego_GO.png"
+      "nombre": "Acero",
+      "efectivo_contra": ["Hielo", "Roca", "Hada"],
+      "debil_contra": ["Fuego", "Lucha", "Tierra"],
+      "inefectivo_contra": [],
+      "poco_eficaz": ["Fuego", "Agua", "Eléctrico", "Acero"],
+      "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/3/31/latest/20210602131505/Tipo_acero_GO.png"
     },
     {
       "nombre": "Agua",
       "efectivo_contra": ["Fuego", "Tierra", "Roca"],
       "debil_contra": ["Eléctrico", "Planta"],
+      "inefectivo_contra": [],
+      "poco_eficaz": ["Agua", "Planta", "Dragón"],
       "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/c/c9/latest/20210602132335/Tipo_agua_GO.png"
+    },
+    {
+      "nombre": "Bicho",
+      "efectivo_contra": ["Planta", "Psíquico", "Siniestro"],
+      "debil_contra": ["Fuego", "Volador", "Roca"],
+      "inefectivo_contra": [],
+      "poco_eficaz": ["Fuego", "Lucha", "Veneno", "Volador", "Fantasma", "Acero", "Hada"],
+      "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/c/c3/latest/20210602131501/Tipo_bicho_GO.png"
+    },
+    {
+      "nombre": "Dragón",
+      "efectivo_contra": ["Dragón"],
+      "debil_contra": ["Hielo", "Dragón", "Hada"],
+      "inefectivo_contra": ["Hada"],
+      "poco_eficaz": ["Acero"],
+      "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/0/0c/latest/20210602132342/Tipo_drag%C3%B3n_GO.png"
     },
     {
       "nombre": "Eléctrico",
       "efectivo_contra": ["Agua", "Volador"],
       "debil_contra": ["Tierra"],
+      "inefectivo_contra": ["Tierra"],
+      "poco_eficaz": ["Eléctrico", "Planta", "Dragón"],
       "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/5/55/latest/20210602132337/Tipo_el%C3%A9ctrico_GO.png"
     },
     {
-      "nombre": "Planta",
-      "efectivo_contra": ["Agua", "Tierra", "Roca"],
-      "debil_contra": ["Fuego", "Hielo", "Veneno", "Volador", "Bicho"],
-      "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/0/0a/latest/20210602132335/Tipo_planta_GO.png"
+      "nombre": "Fantasma",
+      "efectivo_contra": ["Psíquico", "Fantasma"],
+      "debil_contra": ["Fantasma", "Siniestro"],
+      "inefectivo_contra": ["Normal"],
+      "poco_eficaz": ["Siniestro"],
+      "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/1/1a/latest/20210602131503/Tipo_fantasma_GO.png"
+    },
+    {
+      "nombre": "Fuego",
+      "efectivo_contra": ["Planta", "Hielo", "Bicho", "Acero"],
+      "debil_contra": ["Agua", "Tierra", "Roca"],
+      "inefectivo_contra": [],
+      "poco_eficaz": ["Fuego", "Agua", "Roca", "Dragón"],
+      "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/7/7e/latest/20210602132335/Tipo_fuego_GO.png"
+    },
+    {
+      "nombre": "Hada",
+      "efectivo_contra": ["Lucha", "Dragón", "Siniestro"],
+      "debil_contra": ["Veneno", "Acero"],
+      "inefectivo_contra": [],
+      "poco_eficaz": ["Fuego", "Veneno", "Acero"],
+      "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/9/91/latest/20210602132347/Tipo_hada_GO.png"
     },
     {
       "nombre": "Hielo",
       "efectivo_contra": ["Planta", "Tierra", "Volador", "Dragón"],
       "debil_contra": ["Fuego", "Lucha", "Roca", "Acero"],
+      "inefectivo_contra": [],
+      "poco_eficaz": ["Fuego", "Agua", "Hielo", "Acero"],
       "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/f/fe/latest/20210602132341/Tipo_hielo_GO.png"
     },
     {
       "nombre": "Lucha",
       "efectivo_contra": ["Normal", "Hielo", "Roca", "Siniestro", "Acero"],
       "debil_contra": ["Volador", "Psíquico", "Hada"],
+      "inefectivo_contra": ["Fantasma"],
+      "poco_eficaz": ["Veneno", "Volador", "Psíquico", "Bicho", "Hada"],
       "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/9/95/latest/20210602131451/Tipo_lucha_GO.png"
     },
     {
-      "nombre": "Veneno",
-      "efectivo_contra": ["Planta", "Hada"],
-      "debil_contra": ["Tierra", "Psíquico"],
-      "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/7/74/latest/20210602131455/Tipo_veneno_GO.png"
+      "nombre": "Normal",
+      "efectivo_contra": [],
+      "debil_contra": ["Lucha"],
+      "inefectivo_contra": ["Fantasma"],
+      "poco_eficaz": ["Roca", "Acero"],
+      "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/e/e0/latest/20210602131449/Tipo_normal_GO.png"
     },
     {
-      "nombre": "Tierra",
-      "efectivo_contra": ["Fuego", "Eléctrico", "Veneno", "Roca", "Acero"],
-      "debil_contra": ["Agua", "Planta", "Hielo"],
-      "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/1/15/latest/20210602131457/Tipo_tierra_GO.png"
-    },
-    {
-      "nombre": "Volador",
-      "efectivo_contra": ["Planta", "Lucha", "Bicho"],
-      "debil_contra": ["Eléctrico", "Hielo", "Roca"],
-      "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/1/18/latest/20210602131453/Tipo_volador_GO.png"
+      "nombre": "Planta",
+      "efectivo_contra": ["Agua", "Tierra", "Roca"],
+      "debil_contra": ["Fuego", "Hielo", "Veneno", "Volador", "Bicho"],
+      "inefectivo_contra": [],
+      "poco_eficaz": ["Fuego", "Planta", "Veneno", "Volador", "Bicho", "Dragón", "Acero"],
+      "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/0/0a/latest/20210602132335/Tipo_planta_GO.png"
     },
     {
       "nombre": "Psíquico",
       "efectivo_contra": ["Lucha", "Veneno"],
       "debil_contra": ["Bicho", "Fantasma", "Siniestro"],
+      "inefectivo_contra": ["Siniestro"],
+      "poco_eficaz": ["Psíquico", "Acero"],
       "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/b/b3/latest/20210602132338/Tipo_ps%C3%ADquico_GO.png"
-    },
-    {
-      "nombre": "Bicho",
-      "efectivo_contra": ["Planta", "Psíquico", "Siniestro"],
-      "debil_contra": ["Fuego", "Volador", "Roca"],
-      "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/c/c3/latest/20210602131501/Tipo_bicho_GO.png"
     },
     {
       "nombre": "Roca",
       "efectivo_contra": ["Fuego", "Hielo", "Volador", "Bicho"],
       "debil_contra": ["Agua", "Planta", "Lucha", "Tierra", "Acero"],
+      "inefectivo_contra": [],
+      "poco_eficaz": ["Lucha", "Tierra", "Acero"],
       "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/b/bb/latest/20210602131459/Tipo_roca_GO.png"
-    },
-    {
-      "nombre": "Fantasma",
-      "efectivo_contra": ["Psíquico", "Fantasma"],
-      "debil_contra": ["Fantasma", "Siniestro"],
-      "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/1/1a/latest/20210602131503/Tipo_fantasma_GO.png"
-    },
-    {
-      "nombre": "Dragón",
-      "efectivo_contra": ["Dragón"],
-      "debil_contra": ["Hielo", "Dragón", "Hada"],
-      "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/0/0c/latest/20210602132342/Tipo_drag%C3%B3n_GO.png"
     },
     {
       "nombre": "Siniestro",
       "efectivo_contra": ["Psíquico", "Fantasma"],
       "debil_contra": ["Lucha", "Bicho", "Hada"],
+      "inefectivo_contra": [],
+      "poco_eficaz": ["Lucha", "Siniestro", "Hada"],
       "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/a/a1/latest/20210602132344/Tipo_siniestro_GO.png"
     },
     {
-      "nombre": "Acero",
-      "efectivo_contra": ["Hielo", "Roca", "Hada"],
-      "debil_contra": ["Fuego", "Lucha", "Tierra"],
-      "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/3/31/latest/20210602131505/Tipo_acero_GO.png"
+      "nombre": "Tierra",
+      "efectivo_contra": ["Fuego", "Eléctrico", "Veneno", "Roca", "Acero"],
+      "debil_contra": ["Agua", "Planta", "Hielo"],
+      "inefectivo_contra": ["Volador"],
+      "poco_eficaz": ["Planta", "Bicho"],
+      "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/1/15/latest/20210602131457/Tipo_tierra_GO.png"
+    },
+
+    {
+      "nombre": "Veneno",
+      "efectivo_contra": ["Planta", "Hada"],
+      "debil_contra": ["Tierra", "Psíquico"],
+      "inefectivo_contra": ["Acero"],
+      "poco_eficaz": ["Fantasma", "Psíquico", "Tierra", "Veneno"],
+      "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/7/74/latest/20210602131455/Tipo_veneno_GO.png"
     },
     {
-      "nombre": "Hada",
-      "efectivo_contra": ["Lucha", "Dragón", "Siniestro"],
-      "debil_contra": ["Veneno", "Acero"],
-      "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/9/91/latest/20210602132347/Tipo_hada_GO.png"
+      "nombre": "Volador",
+      "efectivo_contra": ["Planta", "Lucha", "Bicho"],
+      "debil_contra": ["Eléctrico", "Hielo", "Roca"],
+      "inefectivo_contra": [],
+      "poco_eficaz": ["Acero", "Eléctrico", "Roca"],
+      "logo": "https://images.wikidexcdn.net/mwuploads/wikidex/1/18/latest/20210602131453/Tipo_volador_GO.png"
     }
   ]
 }
