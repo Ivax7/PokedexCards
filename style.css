@@ -3,6 +3,14 @@
   src: url('/pokemon/Pokemon\ Solid.ttf') format('truetype');
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Pokémon Solid', sans-serif;
+  font-size: 18px;
+}
+
 body {
   background: linear-gradient(135deg, #f3ec78, #000000);
   background-image: url("https://images5.alphacoders.com/566/thumb-1920-566522.jpg");
@@ -17,15 +25,52 @@ body {
   user-select: none;
 }
 
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Pokémon Solid', sans-serif;
-  font-size: 18px;
+/* Flechas fuera de los article para cambiar de cartas*/
+.arrow {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  opacity: 0.4;
+  cursor: pointer;
+  width: 50px;
+  transition: all .2s ease-in-out;
+  z-index: 2;
+  height: fit-content;
 }
 
+.arrow::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  width: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 25px solid white;
+  z-index: 20;
+  transform: translateY(-50%);
+}
+
+.left {
+  transform: rotate(180deg);
+  left: -700px;
+}
+
+.right {
+  right: -700px;
+}
+
+.arrow:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.left:hover {
+  transform: scale(1.1) rotate(180deg);
+}
+
+
+/* Article principal */
 .article {
   position: absolute;
   inset: 0;
@@ -42,6 +87,20 @@ body {
 
 }
 
+/* Section en el que añadimos la entrada de pokedex */
+.bio {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 300px;
+  background-color: transparent;
+  border-top: 1px solid #000; /* Borde negro */
+  border-bottom: 1px solid #000; /* Borde negro */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Contenido del section */
 .nombre {
   text-align: center;
   font-size: 24px;
@@ -70,38 +129,6 @@ body {
   z-index: 6;
 }
 
-.verEfectividad {
-  display: block;
-  position: absolute;
-  font-size: 12px;
-  background-color: #f0c040; /* Amarillo Pikachu */
-  border: none;
-  padding-inline: 10px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  cursor: pointer;
-  z-index: 5;
-  bottom: 8px;
-  right: 10px;
-}
-
-.verEfectividad:hover {
-  background-color: #f0a020; /* Amarillo más oscuro */
-}
-
-
-.bio {
-  position: relative;
-  display: flex;
-  width: 100%;
-  height: 300px;
-  background-color: transparent;
-  border-top: 1px solid #000; /* Borde negro */
-  border-bottom: 1px solid #000; /* Borde negro */
-  justify-content: center;
-  align-items: center;
-}
-
 .gif {
   height: 100%;
   width: 400px;
@@ -128,17 +155,19 @@ body {
   letter-spacing: 15px; 
 }
 
-.iconos {
+/* Article secundario */
+/* Barra inferior dónde se muestra la línea evolutiva y la tabla de tipos */
+.bio2 {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 49px;
-  background-color: #9c0000; /* Rojo Pokéball */
-
+  background-color: #9c0000;
 }
 
-.iconos img {
+/* Iconos de las evoluciones para cambiar entre ellos */
+.evolucion {
   width: 35px;
   height: auto;
   border-radius: 50%;
@@ -150,66 +179,72 @@ body {
   z-index: 2;
 }
 
-.iconos img:hover {
+.evolucion:hover {
   transform: scale(1.05);
   filter: brightness(1);
 }
 
-/* Cuando pulsamos en un icono que detecte en evolucion estamos */
-.iconos img.active {
+/* Cuando pulsamos en una evolucion que detecte en la que estamos */
+.evolucion.active {
   filter: brightness(1.1);
   border: 2px solid #4e8;
   width: 45px;
 }
-.iconos img.active:hover {
+.evolucion.active:hover {
   transform: scale(1);
   
 }
 
-.arrow {
+/* Estilos para los niveles de las evoluciones */
+.flechaNvl {
   position: absolute;
-  inset: 0;
-  margin: auto;
-  height: 20px;
-  opacity: 0.4;
-  cursor: pointer;
-  width: 50px;
-  height: 50px;
-  transition: all .2s ease-in-out;
-  z-index: 2;
-}
-
-.arrow::before {
-  content: "";
-  position: absolute;
+  width: 30%;
+  height: 14px;
+  background-color: #a5b9cf; /* Color de fondo */
+  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 50%;
-  left: 30px;
-  width: 0;
-  height: 0;
-  border-top: 20px solid transparent;
-  border-bottom: 20px solid transparent;
-  border-left: 25px solid white;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.left {
-  transform: rotate(180deg);
-  left: -700px;
+.textNvl {
+  z-index: 9999;
+  position: absolute;
+  left: 52px;
+  color: rgb(0, 0, 0); /* Color del texto */
+  font-size: 8px;
 }
 
-.right {
-  right: -700px;
-
+.segundaEvo{
+  left: 135px;
 }
 
-.arrow:hover {
-  transform: scale(1.1);
-  opacity: 1;
+/* Tabla de tipos*/
+.tablaTipos {
+  display: block;
+  position: absolute;
+  font-size: 12px;
+  background-color: #f0c040; /* Amarillo Pikachu */
+  border: none;
+  padding-inline: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  z-index: 5;
+  bottom: 8px;
+  right: 10px;
 }
 
-.left:hover {
-  transform: scale(1.1) rotate(180deg);
+.tablaTipos:hover {
+  background-color: #f0a020; /* Amarillo más oscuro */
 }
+
+
+
+/* Carta de debilidades y efectividad del pokemon */
 
 .carta{
   width: 300px;
@@ -226,6 +261,7 @@ body {
   display: none;
 }
 
+/* Header de la carta */
 .cabecera{
   height: 50px;
   width: auto;
@@ -236,6 +272,7 @@ body {
   border-bottom: 1px solid;
 }
 
+/* Texto del tipo del pokemon */
 .tipoSeleccionado{
   height: 100%;
   text-align: center;
@@ -243,42 +280,52 @@ body {
   align-items: center;
   line-height: 2.3;
 }
-.carta img{
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid white;
-}
+
+/* estilamos el icono principal*/
 .cabecera img{
   position: absolute;
   right: 10px;
 }
 
+/* estila el icono tipo principal y las debilidades y efectividades*/
+.carta img {
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+
+/* Contenido de la caja */
 .contenido {
   height: auto;
   flex: 1;
 }
 
+/* Contenido debilidades */
 .containerTipos {
   background-color: rgb(187, 132, 132);
-  height: 145px;
+  height: 144px;
 }
 
+/* Contenido efectivo */
 .efectivo {
   margin-bottom: 10px;
   background-color: rgb(132, 187, 146);
 }
 
-.tablaTipos{
+/* Texto efectivo */
+.efectividad{
   text-align: center;
   font-size: 14px;
   text-decoration: underline;
   color: green;
 }
 
+/* Texto debilidad */
 .debil{
   color: #9c0000;
 }
 
+/* Container de los iconos debiles y efectivos */
 .iconosTa{
   position: relative;
   display: flex;
@@ -288,6 +335,7 @@ body {
   justify-content: center;
 }
 
+/* Iconos tipos debiles y efectivos*/
 .tipoTabla {
   position: relative;
   justify-content: center;
@@ -305,6 +353,7 @@ body {
   display: block;
 }
 
+/* Etiqueta que aparece al hacer hover a los iconos de tipos */
 .etiqueta {
   display: none;
   position: absolute;
@@ -332,36 +381,7 @@ body {
 }
 
 
-/* Estilos para los niveles de las evoluciones */
-.flechaNvl {
-  position: absolute;
-  width: 30%;
-  height: 14px;
-  background-color: #a5b9cf; /* Color de fondo */
-  margin-right: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 360px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.textNvl {
-  z-index: 9999;
-  position: absolute;
-  left: 52px;
-  color: rgb(0, 0, 0); /* Color del texto */
-  font-size: 8px;
-  
-}
-
-.segundaEvo{
-  left: 135px;
-}
-
-
-/* Tabla de tipos*/
+/* Al abrir tabla de tipos */
 .tablaTiposEfectividad {
   position: relative;
   height: auto;
@@ -375,6 +395,7 @@ body {
   display: none;
 }
 
+/* Titulo de la tabla */
 .titulo {
   background-color: #9c0000;
   text-align: center;
@@ -383,32 +404,29 @@ body {
   letter-spacing: 0.15rem;
 }
 
+/* Contenedor principal en el que añadimos la tabla*/
 .grid-container {
   position: relative;
-  width: 96.9%; /* Ancho completo del contenedor de la tabla */
-  border-collapse: collapse; /* Colapso de los bordes de la tabla */
+  width: 96.9%;
+  border-collapse: collapse;
   float: right;
   margin-top: 20px;
 }
 
+/* Contenedor de los iconos padre, de las cabeceras de cada icono */
+/* Columna como filas*/
 .padre {
   background-color: #e4e3e3; /* Color de fondo de las celdas de los elementos padre */
   padding: 0; /* Eliminamos el espacio interno */
   border: 1px solid #414141; /* Borde de las celdas de los elementos padre */
 }
 
+/* Imagen icono que añadimos con js*/
 .padre img {
   display: block; /* Para evitar espacios debajo de la imagen */
   max-width: 16px; /* Ancho máximo de la imagen */
   height: auto; /* Altura automática para mantener la proporción */
   margin: auto; /* Centrar horizontalmente */
-}
-
-.hijo {
-  background-color: #fff; /* Color de fondo de las celdas de los elementos hijo */
-  text-align: center; /* Alineación del texto de los elementos hijo */
-  padding: 10px; /* Espaciado interno de las celdas de los elementos hijo */
-  border: 1px solid #ccc; /* Borde de las celdas de los elementos hijo */
 }
 
 .esquina {
@@ -437,9 +455,28 @@ body {
 }
 
 .inefectivo {
-  background-color: rgb(187, 187, 187);
+  background-color: #999999;
 }
 
+/* Estilo de los headers informativos */
+
+/* Info de las columnas */
+.horizontal-header{
+  position: absolute;
+  width: 103.2%;
+  height: 20px;
+  right: 0;
+  top: -20px;
+  background-color: rgb(228, 191, 157);
+  font-size: 10px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+/* Info de las filas */
 .vertical-header{
   position: absolute;
   width: 20px;
@@ -456,19 +493,4 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.horizontal-header{
-  position: absolute;
-  width: 103.2%;
-  height: 20px;
-  right: 0;
-  top: -20px;
-  background-color: rgb(228, 191, 157);
-  font-size: 10px;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
 }

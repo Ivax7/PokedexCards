@@ -1,16 +1,18 @@
-Miercoles 12/06:
+- Revisión + comentarios
+  - Revisar funciones y depuración del código js
+  - Añadir el reset de css
 
-  TABLA DE TIPOS
-    - Marcar en brillante toda la fila que coincida con el tipo para ver lo importante de este tipo
-    - Hacer click en los iconos y que se marque toda la fila o la columna
-
-  - Crear una etiqueta nueva que sea: ver debilidades del pokemon: (preguntar al chatGPT como hacer la lógica)
-
-------------------
 - Aumentar el tamaño de todo
 - Depuración código basura en "css"
-- Revisión + comentarios
 
+TABLA DE TIPOS
+  - Hacer click en los iconos y que se marque toda la fila o la columna
+
+- Crear una etiqueta nueva que sea: ver debilidades del pokemon: (preguntar al chatGPT como hacer la lógica)
+
+- Crear transiciones al hacer click y abrir pestañas de la carta
+
+- Crear con javascript los niveles evolutivos
 CONJUNTO
 - Crear la página principal de "Pokedex" pero por las primeras versiones, al hacer click redirecciona a esta pestaña
   - Agregar el efecto hover star wars y que aparezca otra imagen del pokemon por encima ("Ver información")

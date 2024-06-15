@@ -1,95 +1,12 @@
 // Traer los elementos HTML a variables JS
 const section = document.querySelector(".bio");
-const iconsContainer = document.querySelector(".iconos");
+const bio2 = document.querySelector(".bio2");
 const article = document.querySelector(".article");
 const right = document.querySelector(".right");
 const left = document.querySelector(".left");
 const carta = document.querySelector(".carta");
 let currentIndex = 0; // índice actual del array
 let pokemons;
-
-
-
-
-// Función para actualizar la información de los tipos
-const updateTipoInfo = (tipo, tipos) => {
-  const tipoSeleccionado = carta.querySelector('.tipoSeleccionado');
-  const cartaTipo = carta.querySelector('.carta-tipo');
-  const iconosEfectivo = carta.querySelector('.iconos-efectivo');
-  const iconosDebilidad = carta.querySelector('.iconos-debil');
-
-  // Mostrar el nombre del tipo seleccionado
-  tipoSeleccionado.textContent = tipo.nombre;
-
-  // Mostrar el logo del tipo seleccionado
-  cartaTipo.src = tipo.logo;
-
-  // Limpiar los iconos existentes
-  iconosEfectivo.innerHTML = '';
-  iconosDebilidad.innerHTML = '';
-
-  // Mostrar los tipos efectivos
-  tipo.efectivo_contra.forEach(nombreTipo => {
-    const tipoInfo = tipos.find(t => t.nombre === nombreTipo);
-    if (tipoInfo) {
-    // Crear etiqueta de tipo efectivo
-    const iconoEfectivo = document.createElement('div');
-    iconoEfectivo.className = "tipoTabla efectividad";
-
-    // Crear imagen del tipo efectivo
-    const imgEfectivo = document.createElement('img');
-    imgEfectivo.src = tipoInfo.logo;
-    iconoEfectivo.appendChild(imgEfectivo);
-
-    // Crear texto del tipo efectivo
-    const textoEfectivo = document.createElement('span');
-    textoEfectivo.className = "etiqueta"
-    textoEfectivo.textContent = tipoInfo.nombre;
-    iconoEfectivo.appendChild(textoEfectivo);
-    
-    // Agregar etiqueta de tipo efectivo a la carta
-    iconosEfectivo.appendChild(iconoEfectivo);
-    }
-  });
-    
-    // Mostrar las debilidades
-  tipo.debil_contra.forEach(nombreTipo => {
-    const tipoInfo = tipos.find(t => t.nombre === nombreTipo);
-    if (tipoInfo) {
-    // Crear etiqueta de tipo débil
-    const iconoDebil = document.createElement('div');
-    iconoDebil.className = "tipoTabla debilidad";
-    
-    // Crear imagen del tipo débil
-    const imgDebil = document.createElement('img');
-    imgDebil.src = tipoInfo.logo;
-    iconoDebil.appendChild(imgDebil);
-    
-    // Crear texto del tipo débil
-    const textoDebil = document.createElement('span');
-    textoDebil.textContent = tipoInfo.nombre;
-    textoDebil.className = "etiqueta"
-    iconoDebil.appendChild(textoDebil);
-    
-    // Agregar etiqueta de tipo débil a la carta
-    iconosDebilidad.appendChild(iconoDebil);
-    }
-  });
-};
-
-// Función para actualizar la información de los tipos por elemento
-const updateTipoInfoByElement = (tipoElemento, tipos) => {
-  const tipoNombre = tipoElemento.dataset.tipo;
-  const tipoSeleccionado = tipos.find(tipo => tipo.nombre === tipoNombre);
-
-  if (tipoSeleccionado) {
-    updateTipoInfo(tipoSeleccionado, tipos);
-    carta.style.display = "block";
-  } else {
-    console.log("No se encontró ningún tipo con ese nombre.");
-  }
-};
-
 
 // Llamamos al JSON con la información de la pokedex
 fetch('infoPokemon.json')
@@ -107,15 +24,17 @@ fetch('infoPokemon.json')
           return;
         }
 
-        // Función para crear y actualizar los elementos del Pokémon
+        // ---------------------------------------------------------- //
+
+        // FUNCIÓN PARA CREAR Y ACTUALIZAR LOS ATRIBUTOS DEL POKEMON
         const createPokemonElements = () => {
-          // Creamos el primer nombre (charmander)
+          // NOMBRE
           const nombre = document.createElement('h2');
           nombre.className = "nombre";
           nombre.innerHTML = pokemons[currentIndex].nombre;
           article.insertBefore(nombre, article.firstChild);
 
-          // Creamos el primer TIPO (fuego)
+          // TIPO
           const tipo = document.createElement('img');
           tipo.className = "tipo uno";
           tipo.dataset.tipo = pokemons[currentIndex].tipoNombre1; // Agregar data-tipo
@@ -124,31 +43,35 @@ fetch('infoPokemon.json')
 
           tipo.addEventListener('click', (e) => {
             e.stopPropagation();
+            // Llamamos a la fución para MOSTRAR CARTA
             updateTipoInfoByElement(tipo, tipos);
             carta.style.display = "block";
+            // Llamamos a la fución para que brillen en la TABLA DE TIPOS
             setTipoBrilloActivo(tipo);
           });
 
-          // Creamos el primer nPokedex (3)
+          // NPOKEDEX
           const nPokedex = document.createElement('p');
           nPokedex.className = "numeroPokedex";
           nPokedex.innerHTML = '#' + pokemons[currentIndex].nPokedex;
           article.insertBefore(nPokedex, article.firstChild);
 
-          // Creamos la primera imagen (charmander)
+          // IMAGEN(GIF)
           const imagen = document.createElement('img');
           imagen.className = "gif";
           section.appendChild(imagen);
           imagen.src = pokemons[currentIndex].img;
 
-          // Creamos la primera descripción (charmander)
+          // DESCRIPCIÓN
           const descripcion = document.createElement('p');
           descripcion.className = "descripcion";
           descripcion.textContent = pokemons[currentIndex].descripcion;
           section.appendChild(descripcion);
         };
 
-        // Función para actualizar la información del Pokémon
+        // ---------------------------------------------------------- //
+
+        // FUNCIÓN PARA ACTUALIZAR LA INFORMACIÓN DEL POKÉMON
         const updatePokemonInfo = (index) => {
           // Actualizamos la imagen
           const imagen = document.querySelector('.gif');
@@ -174,6 +97,7 @@ fetch('infoPokemon.json')
             existingTipo2.remove();
           }
 
+          // Comprobamos si existe tipo 2 en el JSON
           if (pokemons[index].tipo2.length !== 0) {
             // Si no está vacío, creamos el logo del tipo2
             const tipo2 = document.createElement('img');
@@ -182,17 +106,22 @@ fetch('infoPokemon.json')
             section.appendChild(tipo2);
             tipo2.src = pokemons[index].tipo2;
 
-            tipo2
-            .addEventListener('click', (e) => {
+            tipo2.addEventListener('click', (e) => {
               e.stopPropagation();
+              // Llamamos a la fución para MOSTRAR CARTA
               updateTipoInfoByElement(tipo2, tipos);
               carta.style.display = "block";
+              // Llamamos a la fución para que brillen en la TABLA DE TIPOS
               setTipoBrilloActivo(tipo2);
             });
           }
-          // Actualizamos la clase activa de los iconos
-          const iconos = document.querySelectorAll('.icono');
-          iconos.forEach((icon, idx) => {
+
+        // ---------------------------------------------------------- //
+          
+
+          // Actualizamos la clase activa de EVOLUCIONES
+          const evolucion = document.querySelectorAll('.evolucion');
+          evolucion.forEach((icon, idx) => {
             if (idx === index) {
               icon.classList.add('active');
             } else {
@@ -201,33 +130,42 @@ fetch('infoPokemon.json')
           });
         };
 
-        // Inicializar los elementos del primer Pokémon
+        // ---------------------------------------------------------- //
+      
+        // Inicializar los elementos del primer Pokémon por defecto
+        // Siempre aparece charmander en este caso, no hace falta hacer nada
         createPokemonElements();
 
+        // ---------------------------------------------------------- //
+
+        // EVOLUCIONES
         // Inicializamos los iconos
         pokemons.forEach((poke, index) => {
-          const icono = document.createElement('img');
-          icono.className = "icono";
-          icono.src = poke.icono;
+          const evolucion = document.createElement('img');
+          evolucion.className = "evolucion";
+          evolucion.src = poke.icono;
           // Verificamos si el Pokémon tiene un segundo tipo
           if (poke.tipoNombre2) {
             // Si tiene un segundo tipo, concatenamos ambos tipos separados por un guion (-)
-            icono.dataset.tipo = `${poke.tipoNombre1}-${poke.tipoNombre2}`;
+            evolucion.dataset.tipo = `${poke.tipoNombre1}-${poke.tipoNombre2}`;
           } else {
             // Si solo tiene un tipo, asignamos ese tipo
-            icono.dataset.tipo = poke.tipoNombre1;
+            evolucion.dataset.tipo = poke.tipoNombre1;
           }
 
           if (index === currentIndex) {
-            icono.classList.add('active');
+            evolucion.classList.add('active');
           }
-          icono.addEventListener('click', () => {
+          evolucion.addEventListener('click', () => {
             currentIndex = index;
             updatePokemonInfo(index);
           });
-          iconsContainer.appendChild(icono);
+          bio2.appendChild(evolucion);
         });
 
+        // ---------------------------------------------------------- //
+
+        // FUNCIONALIDAD FLECHAS
         // Evento flecha derecha
         right.addEventListener('click', () => {
           if (currentIndex < pokemons.length - 1) {
@@ -244,9 +182,12 @@ fetch('infoPokemon.json')
           }
         });
 
-        // Clicar fuera de la carta para que se cierre
-        document.addEventListener('click', (e) => {
-          if (!carta.contains(e.target) && !e.target.classList.contains('tipo')) {
+        // ---------------------------------------------------------- //
+
+        // FUNCIÓN PARA CERRAR VENTANAS
+        const cerrarVentanas = (event) => {
+          // Lógica para la carta
+          if (!carta.contains(event.target) && !event.target.classList.contains('tipo')) {
             carta.style.display = "none";
             // Devolvemos el brillo al icono del tipo
             const tipos = document.querySelectorAll('.tipo');
@@ -254,8 +195,23 @@ fetch('infoPokemon.json')
               tipo.style.filter = "brightness(0.75)";
             });
           }
-        });
+        
+          // Lógica para la tabla de tipos de efectividad
+          const isClickInsideTabla = tablaTiposEfectividad.contains(event.target);
+          const isClickInsideBtn = tablaTipos.contains(event.target);
+        
+          // Si el clic se hizo fuera de la tabla y del botón, ocultamos la tabla
+          if (!isClickInsideTabla && !isClickInsideBtn) {
+            tablaTiposEfectividad.style.display = "none";
+          }
+        };
+        
+        // Clicar fuera de la carta y la tabla para que se cierren
+        document.addEventListener('click', cerrarVentanas);
+        
+        // ---------------------------------------------------------- //
 
+        // FUNCIÓN PARA INCREMENTAR EL BRILLO AL TIPO ACTIVO
         const setTipoBrilloActivo = (tipoActivo) => {
           const tipos = document.querySelectorAll(".tipo");
           tipos.forEach(tipo => {
@@ -267,13 +223,14 @@ fetch('infoPokemon.json')
           });
         }
 
+        // ---------------------------------------------------------- //
 
-        // Añadimos el btn y la tabla
-        verEfectividadBtn = document.querySelector(".verEfectividad");
+        // Añadimos el btn y la tabla de tipos
+        tablaTipos = document.querySelector(".tablaTipos");
         tablaTiposEfectividad = document.querySelector(".tablaTiposEfectividad");
         
         // Creamos el evento para que se muestre la tabla de tipos
-        verEfectividadBtn.addEventListener("click", () => {
+        tablaTipos.addEventListener("click", () => {
           tablaTiposEfectividad.style.display = "block";
         
         // Obtenemos el tipo del pokemon actual
@@ -290,6 +247,8 @@ fetch('infoPokemon.json')
               cell.style.filter = "brightness(0.6)";
           }
         });
+
+        // ---------------OPTIMIZAR------------------------ //
       
         // Resaltar las celdas correspondientes al tipo del Pokémon actual
         const celdasVacias = document.querySelectorAll('.celdaVacia');
@@ -316,9 +275,7 @@ fetch('infoPokemon.json')
               });
           }
         });
-        
-        
-        
+
         // Resaltar la columna correspondiente al tipo del Pokémon actual
         const columnas = document.querySelectorAll('.grid-container thead th');
         columnas.forEach(columna => {
@@ -328,22 +285,10 @@ fetch('infoPokemon.json')
             } else {
                 columna.classList.remove('resaltada-columna');
             }
-        });
-      });
-        
-        
-        // Creamos el evento para cerrar la tabla si se pulsa fuera de ella
-        document.addEventListener("click", (event) => {
-        // Comprobamos si el clic se hizo fuera de la tabla y del botón
-        const isClickInsideTabla = tablaTiposEfectividad.contains(event.target);
-        const isClickInsideBtn = verEfectividadBtn.contains(event.target);
-
-        // Si el clic se hizo fuera de la tabla y del botón, ocultamos la tabla
-        if (!isClickInsideTabla && !isClickInsideBtn) {
-          tablaTiposEfectividad.style.display = "none";
-          }
+          });
         });
 
+        // ---------------------------------------------------------- //
 
         // Creamos los elementos padre columna de la tabla de tipos
         let cabecerasColumna = document.querySelector(".headers");
@@ -397,9 +342,90 @@ fetch('infoPokemon.json')
           
           body.appendChild(tr);
         }
-
-
+        // ---------------------------------------------------------- //
       });
   });
+
+// HACEMOS APARECER LA CARTA
+// FUNCION PARA ACTUALIZAR LA INFORMACIÓN DE LOS TIPOS POR ELEMENTO
+const updateTipoInfoByElement = (tipoElemento, tipos) => {
+  const tipoNombre = tipoElemento.dataset.tipo;
+  const tipoSeleccionado = tipos.find(tipo => tipo.nombre === tipoNombre);
+
+  if (tipoSeleccionado) {
+    updateTipoInfo(tipoSeleccionado, tipos);
+    carta.style.display = "block";
+  } else {
+    console.log("No se encontró ningún tipo con ese nombre.");
+  }
+};
+
+// RELLENAMOS LA INFORMACIÓN DE LA CARTA
+// FUNCIÓN PARA ACTUALIZAR LA INFORMACIÓN DE LA CARTA DE TIPOS //
+const updateTipoInfo = (tipo, tipos) => {
+  const tipoSeleccionado = carta.querySelector('.tipoSeleccionado');
+  const cartaTipo = carta.querySelector('.carta-tipo');
+  const iconosEfectivo = carta.querySelector('.iconos-efectivo');
+  const iconosDebilidad = carta.querySelector('.iconos-debil');
+
+  // Mostrar el nombre del tipo seleccionado
+  tipoSeleccionado.textContent = tipo.nombre;
+
+  // Mostrar el logo del tipo seleccionado
+  cartaTipo.src = tipo.logo;
+
+  // Limpiar los iconos existentes
+  iconosEfectivo.innerHTML = '';
+  iconosDebilidad.innerHTML = '';
+
+  // Mostrar los tipos efectivos
+  tipo.efectivo_contra.forEach(nombreTipo => {
+    const tipoInfo = tipos.find(t => t.nombre === nombreTipo);
+    if (tipoInfo) {
+    // Crear etiqueta de tipo efectivo
+    const iconoEfectivo = document.createElement('div');
+    iconoEfectivo.className = "tipoTabla tipo-efectivo";
+
+    // Crear imagen del tipo efectivo
+    const imgEfectivo = document.createElement('img');
+    imgEfectivo.src = tipoInfo.logo;
+    iconoEfectivo.appendChild(imgEfectivo);
+
+    // Crear texto del tipo efectivo
+    const textoEfectivo = document.createElement('span');
+    textoEfectivo.className = "etiqueta"
+    textoEfectivo.textContent = tipoInfo.nombre;
+    iconoEfectivo.appendChild(textoEfectivo);
+    
+    // Agregar etiqueta de tipo efectivo a la carta
+    iconosEfectivo.appendChild(iconoEfectivo);
+    }
+  });
+    
+    // Mostrar las debilidades
+    tipo.debil_contra.forEach(nombreTipo => {
+    const tipoInfo = tipos.find(t => t.nombre === nombreTipo);
+    if (tipoInfo) {
+    // Crear etiqueta de tipo débil
+    const iconoDebil = document.createElement('div');
+    iconoDebil.className = "tipoTabla tipo-debilidad";
+    
+    // Crear imagen del tipo débil
+    const imgDebil = document.createElement('img');
+    imgDebil.src = tipoInfo.logo;
+    iconoDebil.appendChild(imgDebil);
+    
+    // Crear texto del tipo débil
+    const textoDebil = document.createElement('span');
+    textoDebil.textContent = tipoInfo.nombre;
+    textoDebil.className = "etiqueta"
+    iconoDebil.appendChild(textoDebil);
+    
+    // Agregar etiqueta de tipo débil a la carta
+    iconosDebilidad.appendChild(iconoDebil);
+    }
+  });
+};
+
 
 

@@ -9,12 +9,14 @@
 </head>
 <body>
 
-  <i class="fa-solid fa-arrow-right arrow left"></i>
-  <i class="fa-solid fa-arrow-right arrow right "></i>
+  <!-- Flechas para cambiar entre las cartas de pokemons -->
+  <i class="arrow left"></i>
+  <i class="arrow right "></i>
 
+  <!-- Article principal con el contenido de la carta -->
   <article class="article">
 
-    
+    <!-- Entrada de la pokedex del pokemon -->
     <section class="bio">
       <!-- Inyectamos elementos html con js -->
       <!-- nombre -->
@@ -24,49 +26,50 @@
       <!-- tipo-->
     </section>
       
-      
-    <section class="iconos">
-        
-        <button id="verEfectividad" class="verEfectividad">Ver efectividad del Pokémon</button>
-    </section>
 
-    <!-- Flechas entre iconos para niveles evolutivos -->
+    <!-- Cadena Evolutiva y tabla de tipos -->
+    <section class="bio2">
+      
+      <!-- Botón para ver la tabla de tipos -->
+      <button class="tablaTipos">Tabla de Tipos</button>
+
+      <!-- Flechas entre iconos para niveles evolutivos -->
       <div class="flechaNvl">
         <span class="textNvl primeraEvo">Nvl 16</span>
         <span class="textNvl segundaEvo">Nvl 36</span>
       </div>
 
+    </section>
+
   </article>
 
-  <!-- creamos carta oculta hasta que se hace click en tipo -->
+  <!-- Carta oculta hasta que se hace click en tipo -->
   <article class="carta">
 
     <div class="cabecera">
       <h2 class="tipoSeleccionado"></h2>
-      <img class="carta-tipo" src="" alt="">
+      <img class="carta-tipo" src="">
     </div>
 
-    <div class="container-contenido">
-      
-      <div class="contenido">
-        <div class="efectivo containerTipos">
-          <h3 class="tablaTipos efect">Efectivo</h3>
-          <div class="iconosTa iconos-efectivo">
-            <!-- imagenes según el tipo -->
-          </div>
-        
-        </div>
-        
-        <div class="debilidades containerTipos">
-          <h3 class="tablaTipos debil">Débil</h3>
-          <div class="iconosTa iconos-debil">
-            <!-- imagenes según el tipo -->
-          </div>
+    
+    <div class="contenido">
+    
+      <div class="efectivo containerTipos">
+        <h3 class="efectividad efectivo">Efectivo</h3>
+        <div class="iconosTa iconos-efectivo">
+          <!-- imagenes según el tipo -->
         </div>
       </div>
       
-    </div>
+      <div class="debilidades containerTipos">
+        <h3 class="efectividad debil">Débil</h3>
+        <div class="iconosTa iconos-debil">
+          <!-- imagenes según el tipo -->
+        </div>
+      </div>
 
+    </div>
+    
   </article>
 
   <article class="tablaTiposEfectividad">
@@ -76,27 +79,26 @@
     </div>
 
     <table class="grid-container">
+      
       <thead>
+            <!--Cabeceras informativas del contenido de la tabla-->
             <tr>
                 <th class="vertical-header">Tipo del ataque propio</th>
                 <th class="horizontal-header">Tipo del pokemon oponente</th>
-                <!-- Agrega las cabeceras de las columnas aquí -->
             </tr>
       </thead>
 
+      <!--Contenido principal de la tabla-->
       <tbody class="body">
-
         <!-- Primera fila de elementos padre -->
         <tr class="headers">
           <th class="padre esquina"></th>
+          <!--Los 18 tipos en la columna y filas-->
         </tr>
 
       </tbody>
-  
 
-    
     </table>
-    
     
   </article>
 
