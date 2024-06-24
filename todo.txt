@@ -3,20 +3,52 @@
   - Añadir el reset de css
 
 - Aumentar el tamaño de todo
-- Depuración código basura en "css"
+
+
+
+  background: rgb(243, 220, 143);
+
+
 
 TABLA DE TIPOS
   - Hacer click en los iconos y que se marque toda la fila o la columna
 
 - Crear una etiqueta nueva que sea: ver debilidades del pokemon: (preguntar al chatGPT como hacer la lógica)
-
 - Crear transiciones al hacer click y abrir pestañas de la carta
 
-- Crear con javascript los niveles evolutivos
 CONJUNTO
 - Crear la página principal de "Pokedex" pero por las primeras versiones, al hacer click redirecciona a esta pestaña
   - Agregar el efecto hover star wars y que aparezca otra imagen del pokemon por encima ("Ver información")
 - 2 flashcard por el lado que se muevan
-- Añadir transiciones
 - Añadir api pokemon
- 
+- Conectar con un botón de "Ver más información" la infor en el ejercicio 20 de mouredev
+
+
+- Añadir la pokeApi y cargarme el infoPokemon.json ✅
+- Agregar el tipo ✅
+- Agregar los niveles automaticamente ✅
+- Arreglar el header ponerle más padding✅
+- Arreglar la posicion del tipo✅
+- Arreglar la descripción (más chiquita) y número de pokedex (más atras y cambiar el color)✅
+- Añadir la función ACTUALIZAR la info✅
+  - ACTUALIZAR pokemon info -> añadir esta funcion al evento de las flechas ✅
+  - ACTUALIZAR pokemon info -> añadir esta funcion al evento de las evoluciones ✅
+  - Arreglar la compenetración de las flechas y los emojis ✅
+- Añadir tabla de tipos ✅
+- Añadir evento de cerrar✅
+- Añadir lógica del tipo y que brillen las celdas✅
+- Añadir carta de Debilidades y efectividades✅
+- Corregir estilos carta✅
+- Corregir estilos tabla tipos✅
+- Añadir función para cerrar modales✅
+- Añadir el fondo oscuro al abrir cualquier modal✅
+
+- Añadir un buscador manual de pokemons por nombre/nPokedex
+  - Poner lupita en search✅
+  - Scroll bonito✅
+  - Poder desplazarme entre sugerencias con las flechas
+
+
+- Arreglar tiempos de carga
+- Añadir el sprite suelo pelea pokemon rojo fuego
+- Al final del todo el manejo de las evoluciones extrañas

@@ -11,6 +11,15 @@
   font-size: 18px;
 }
 
+/* Estilo para el fondo oscuro */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Color oscuro con opacidad del 50% */
+  z-index: 9; /* Asegúrate de que esté por encima de todo */
+  display: none; /* Inicialmente oculto */
+}
+
 body {
   background: linear-gradient(135deg, #f3ec78, #000000);
   background-image: url("https://images5.alphacoders.com/566/thumb-1920-566522.jpg");
@@ -23,6 +32,110 @@ body {
   justify-content: center;
   align-items: center;
   user-select: none;
+}
+/* Bucador de pokemons */
+.searchPokemon {
+  position: absolute;
+  transform: translateY(-225px);
+  width: 690px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  z-index: 10;
+}
+
+#pokemonInput {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  border-radius: 10px;
+  background-color: rgb(230, 230, 230);
+  width: 265px;
+  outline: none;
+  border: 1px solid black;
+  height: 40px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+
+}
+
+.searchButton {
+  border: none;
+  position: absolute;
+  right: 150px;
+  color: #fff;
+  background-color: rgba(163, 163, 163, 0.534);
+  border-radius: 100%;
+  padding: 10px;
+  transition: all .3s ease-in-out;
+  cursor: pointer;
+}
+
+.searchButton:hover {
+  background-color: rgba(228, 228, 228, 0.534);
+
+}
+/* Sugerencias de los pokemon */
+/* Estilos para las sugerencias */
+.suggestions {
+  position: absolute;
+  top: calc(100% + 5px); /* Posicionar debajo del input */
+  width: 265px; /* Ancho completo del contenedor padre */
+  max-height: 200px; /* Altura máxima para desplazamiento */
+  overflow-y: auto; /* Habilitar desplazamiento vertical si hay muchas sugerencias */
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  scroll-behavior: smooth; /* Aplicar desplazamiento suave al contenido */
+  z-index: 1000; /* Asegurar que esté sobre otros elementos */
+}
+
+.suggestions p, .suggestion {
+  font-family: 'Courier New', Courier, monospace;
+  padding: 5px;
+}
+.suggestion:hover {
+  background-color: rgb(190, 190, 190);
+
+}
+.suggestions ul {
+  list-style-type: none; /* Quitar viñetas de la lista */
+  padding: 0;
+  margin: 0;
+}
+
+.suggestions li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestions li:hover {
+  background-color: #f2f2f2;
+}
+
+/* Estilos para la scrollbar */
+.suggestions::-webkit-scrollbar {
+  width: 5px; /* Ancho del scrollbar */
+}
+
+
+/* Estilos para el track (parte no desplazada de la scrollbar) */
+.suggestions::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color del track */
+  border-radius: 8px; /* Radio de borde del track */
+}
+
+/* Estilos para el thumb (parte desplazada de la scrollbar) */
+.suggestions::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color del thumb */
+  border-radius: 5px; /* Radio de borde del thumb */
+}
+
+/* Estilos para el thumb cuando se pasa el mouse por encima */
+.suggestions::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color del thumb al pasar el mouse */
 }
 
 /* Flechas fuera de los article para cambiar de cartas*/
@@ -77,7 +190,7 @@ body {
   margin: auto;
   border: 1px solid #000000; /* Rojo Pokéball */
   border-radius: 15px; /* Bordes redondeados */
-  width: 683px;
+  width: 690px;
   height: 390px;
   overflow: hidden;
   background-color: #FFFFFF; /* Blanco Pikachu */
@@ -98,12 +211,17 @@ body {
   border-bottom: 1px solid #000; /* Borde negro */
   justify-content: center;
   align-items: center;
+  background-image: url('https://imgs.search.brave.com/L58nuW1fxh7PZmnCrIIm5epLVpbEXqw6skahScni7RU/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9wNC53/YWxscGFwZXJiZXR0/ZXIuY29tL3dhbGxw/YXBlci81MDMvMTg5/LzE1Ny9wb2tlbW9u/LXZpZGVvLWdhbWVz/LXBpeGVsLWFydC1w/aXhlbHMtd2FsbHBh/cGVyLXByZXZpZXcu/anBn');
 }
 
 /* Contenido del section */
+
 .nombre {
+  display: block;
+  width: 100%;
   text-align: center;
-  font-size: 24px;
+  font-size: 20px;
+  padding-bottom: 5px;
   line-height: 40px;
   letter-spacing: 5px;
   color: #9c0000; /* Rojo Pokéball */
@@ -111,48 +229,58 @@ body {
   background: beige;
 }
 
-.tipo {
+.boxTipos {
   position: absolute;
+  top: 0;
+  right: 10px;
+  z-index: 4;
+}
+
+.tipo {
   width: 35px;
   border-radius: 50%;
   border: 1px solid white;
-  right: 10px;
-  top: -39px;
+  margin-right: 10px;
+  margin-top: 5px;
   cursor: pointer;
   transition: all .2s ease-in-out;
   filter: brightness(0.75);
   z-index: 5;
   }
 
-.dos {
-  right: 50px;
-  z-index: 6;
+.tipo:hover{
+  filter: brightness(1);
 }
 
 .gif {
   height: 100%;
-  width: 400px;
+  background-size: cover;
 }
 
 .descripcion {
-  height: 100%;
+  height: auto;
   width: 100%;
-  float: right;
-  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
   letter-spacing: 1px;
   font-size: 17px;
+  z-index: 1;
 }
 
 .numeroPokedex {
-  height: 300px;
-  width: 100%;
-  color: rgba(141, 141, 141, 0.267);
   position: absolute;
-  font-size: 110px;
+  text-align: center;
+  right: 0;
+  height: 300px;
+  width: 62%;
+  color: #9c000091;
+  margin: 0;
+  padding: 0;
+  font-size: 90px;
   z-index: 1;
-  text-align: right;
-  padding-right: 65px;
-  letter-spacing: 15px; 
+  letter-spacing: 15px;
 }
 
 /* Article secundario */
@@ -162,14 +290,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 49px;
+  height: 44px;
   background-color: #9c0000;
 }
 
 /* Iconos de las evoluciones para cambiar entre ellos */
-.evolucion {
+.evoluciones, .evolucion{
+  position: relative;
+  display: flex;
+}
+
+.imagenEvo {
   width: 35px;
-  height: auto;
   border-radius: 50%;
   margin-inline: 25px;
   border: 2px solid #48d;
@@ -177,65 +309,67 @@ body {
   transition: all .2s ease-in-out;
   filter: brightness(0.7);
   z-index: 2;
+  background-color: #a6acd1;
 }
 
-.evolucion:hover {
-  transform: scale(1.05);
+.imagenEvo:hover {
+  transform: scale(1.1);
   filter: brightness(1);
 }
 
-/* Cuando pulsamos en una evolucion que detecte en la que estamos */
-.evolucion.active {
-  filter: brightness(1.1);
-  border: 2px solid #4e8;
-  width: 45px;
+.textNvl:first-child{
+  display: none;
 }
-.evolucion.active:hover {
-  transform: scale(1);
-  
+
+.textNvl {
+  position: absolute;
+  color: rgb(0, 0, 0); /* Color del texto */
+  font-size: 8px;
+  bottom: 8px;
+  left: -3px;
+}
+
+/* Cuando pulsamos en una evolucion que detecte en la que estamos */
+.imagenEvo.active {
+  border: 2px solid #4e8;
+  transform: scale(1.1);
+  background-color: #fff;
+  filter: brightness(0.9);
+}
+
+.imagenEvo.active:hover {
+  transform: scale(1.1);
+  filter: brightness(1);
+
 }
 
 /* Estilos para los niveles de las evoluciones */
 .flechaNvl {
   position: absolute;
-  width: 30%;
+  width: 40%;
   height: 14px;
-  background-color: #a5b9cf; /* Color de fondo */
-  margin-right: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: linear-gradient(to right, #9c0000, grey, #9c0000);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.textNvl {
-  z-index: 9999;
-  position: absolute;
-  left: 52px;
-  color: rgb(0, 0, 0); /* Color del texto */
-  font-size: 8px;
-}
 
-.segundaEvo{
-  left: 135px;
-}
 
 /* Tabla de tipos*/
 .tablaTipos {
   display: block;
   position: absolute;
   font-size: 12px;
-  background-color: #f0c040; /* Amarillo Pikachu */
   border: none;
   padding-inline: 10px;
   border-radius: 5px;
   transition: background-color 0.3s ease;
   cursor: pointer;
   z-index: 5;
-  bottom: 8px;
   right: 10px;
+  background: rgb(243, 220, 143);
+
 }
 
 .tablaTipos:hover {
@@ -258,6 +392,7 @@ body {
   border: 1px solid;
   overflow: hidden;
   box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
+  z-index: 10;
   display: none;
 }
 
@@ -343,10 +478,13 @@ body {
   cursor: pointer;
   transition: all .2s ease-in-out;
   height: 40px;
+  filter: brightness(0.8);
+  cursor: pointer;
 }
 
 .tipoTabla:hover{
   transform: scale(1.1);
+  filter: brightness(1);
 }
 
 .tipoTabla:hover .etiqueta{
@@ -370,6 +508,7 @@ body {
   color: rgb(131, 137, 216);
   box-shadow: 2px 2px rgba(0, 0, 0, 0.1);
 }
+
 .etiqueta::after {
   content: '';
   position: absolute;
@@ -391,7 +530,7 @@ body {
   border: 1px solid gray;
   border-radius: 12px;
   overflow: hidden;
-  background: #000;
+  z-index: 10;
   display: none;
 }
 
@@ -402,12 +541,14 @@ body {
   color: rgb(255, 255, 255);
   font-weight: lighter;
   letter-spacing: 0.15rem;
+  z-index: 5;
 }
 
 /* Contenedor principal en el que añadimos la tabla*/
 .grid-container {
   position: relative;
-  width: 96.9%;
+  width: 97%;
+  margin-left: 21px;
   border-collapse: collapse;
   float: right;
   margin-top: 20px;
@@ -419,6 +560,7 @@ body {
   background-color: #e4e3e3; /* Color de fondo de las celdas de los elementos padre */
   padding: 0; /* Eliminamos el espacio interno */
   border: 1px solid #414141; /* Borde de las celdas de los elementos padre */
+  font-size: 6px;
 }
 
 /* Imagen icono que añadimos con js*/
@@ -434,7 +576,7 @@ body {
   border: 1px solid black; /* Borde */
 }
 
-.celdaVacia{
+.celdaVacia {
   background-color: #f0f0f0; /* Color de fondo de las celdas de los elementos padre */
   border: 1px solid #ccc; /* Borde de las celdas de los elementos padre */
   font-size: 6px;
@@ -442,9 +584,13 @@ body {
   filter: brightness(0.8);
 }
 
-.celdaVacia.resaltada, .celdaVacia.resaltada-fila {
+.celdaVacia.resaltada {
   filter: brightness(1);
 }
+.resaltada-fila{  
+  filter: brightness(1);
+}
+
 
 .muy-eficaz {
   background-color: #4e8;
@@ -463,9 +609,9 @@ body {
 /* Info de las columnas */
 .horizontal-header{
   position: absolute;
-  width: 103.2%;
+  width: 649px;
   height: 20px;
-  right: 0;
+  right: -1px;
   top: -20px;
   background-color: rgb(228, 191, 157);
   font-size: 10px;
@@ -473,16 +619,15 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 /* Info de las filas */
 .vertical-header{
   position: absolute;
-  width: 20px;
-  height: 100%;
-  left: -20px;
-  bottom: 0px;
+  width: 21px;
+  left: -21px;
+  height: 360px;
+  bottom: 0;
   float: left;
   background-color: rgb(169, 194, 140);
   text-orientation: upright; /* Esto asegura que el texto esté en posición vertical */
@@ -493,4 +638,5 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: -2;
 }

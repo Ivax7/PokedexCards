@@ -8,14 +8,24 @@
   <title>Document</title>
 </head>
 <body>
+  <div class="overlay"></div> <!-- Este es el div para el fondo oscuro -->
 
   <!-- Flechas para cambiar entre las cartas de pokemons -->
   <i class="arrow left"></i>
   <i class="arrow right "></i>
 
+  <article class="searchPokemon">
+    <input type="text" id="pokemonInput" autocomplete="off" placeholder="Search by name/pokedex number">
+    <button class="searchButton fas fa-search"></button>
+    <div id="suggestions" class="suggestions"></div>
+  </article>
+
   <!-- Article principal con el contenido de la carta -->
   <article class="article">
 
+    <div class="boxTipos">
+
+    </div>
     <!-- Entrada de la pokedex del pokemon -->
     <section class="bio">
       <!-- Inyectamos elementos html con js -->
@@ -31,13 +41,9 @@
     <section class="bio2">
       
       <!-- Botón para ver la tabla de tipos -->
-      <button class="tablaTipos">Tabla de Tipos</button>
 
       <!-- Flechas entre iconos para niveles evolutivos -->
-      <div class="flechaNvl">
-        <span class="textNvl primeraEvo">Nvl 16</span>
-        <span class="textNvl segundaEvo">Nvl 36</span>
-      </div>
+
 
     </section>
 
@@ -75,16 +81,17 @@
   <article class="tablaTiposEfectividad">
 
     <div class="titulo">
-        <h3>Tabla de tipos</h3>
+        <h3>Type Chart</h3>
     </div>
 
     <table class="grid-container">
       
+      <!-- Crear con js -->
       <thead>
             <!--Cabeceras informativas del contenido de la tabla-->
             <tr>
-                <th class="vertical-header">Tipo del ataque propio</th>
-                <th class="horizontal-header">Tipo del pokemon oponente</th>
+              <th class="horizontal-header">DEFFENSE</th>
+                <th class="vertical-header">ATTACK</th>
             </tr>
       </thead>
 
@@ -94,6 +101,7 @@
         <tr class="headers">
           <th class="padre esquina"></th>
           <!--Los 18 tipos en la columna y filas-->
+
         </tr>
 
       </tbody>
