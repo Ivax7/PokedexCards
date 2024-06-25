@@ -51,13 +51,12 @@ body {
   font-size: 14px;
   border-radius: 10px;
   background-color: rgb(230, 230, 230);
-  width: 265px;
+  width: 235px;
   outline: none;
   border: 1px solid black;
   height: 40px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   padding: 10px;
-
 }
 
 .searchButton {
@@ -98,7 +97,9 @@ body {
 }
 .suggestion:hover {
   background-color: rgb(190, 190, 190);
-
+}
+.highlighted {
+  background-color: rgb(190, 190, 190);
 }
 .suggestions ul {
   list-style-type: none; /* Quitar viñetas de la lista */

@@ -574,11 +574,22 @@ function cerrarTablaAlClicFuera(event) {
 document.addEventListener('click', cerrarTablaAlClicFuera);
 
 
+const searchPokemon = () => {
+  const searchTerm = pokemonInput.value.trim().toLowerCase();
+  handlePokemonSearch(searchTerm);
+}
 // AGREGAR EVENTO AL BOTÓN DE BÚSQUEDA //
 searchButton.addEventListener('click', async () => {
-  const searchTerm = pokemonInput.value.trim().toLowerCase();
-  await handlePokemonSearch(searchTerm);
+  searchPokemon()
 });
+
+// AGREGAR EVENTO AL ENTER //
+pokemonInput.addEventListener('keypress', async (event) => {
+  if(event.key === 'Enter'){
+    searchPokemon()
+  }
+});
+
 
 const handlePokemonSearch = async (searchTerm) => {
   if (searchTerm === '') {
@@ -599,6 +610,58 @@ const handlePokemonSearch = async (searchTerm) => {
   }
 };
 
+
+let highlightedIndex = -1; // Variable para mantener el índice de la sugerencia resaltada
+
+// Event listener para las teclas de flecha arriba y abajo
+pokemonInput.addEventListener('keydown', (event) => {
+  const suggestions = document.querySelectorAll('.suggestion');
+
+  if (event.key === 'ArrowUp' && highlightedIndex > 0) {
+    // Mover hacia arriba en la lista de sugerencias
+    highlightedIndex--;
+    updateHighlightedSuggestion(suggestions);
+  } else if (event.key === 'ArrowDown' && highlightedIndex < suggestions.length - 1) {
+    // Mover hacia abajo en la lista de sugerencias
+    highlightedIndex++;
+    updateHighlightedSuggestion(suggestions);
+  }
+});
+
+// Función para actualizar la sugerencia resaltada y el input
+const updateHighlightedSuggestion = (suggestions) => {
+  suggestions.forEach((suggestion, index) => {
+    if (index === highlightedIndex) {
+      suggestion.classList.add('highlighted');
+    } else {
+      suggestion.classList.remove('highlighted');
+    }
+  });
+};
+
+// Event listener para la tecla Enter en el campo de entrada
+pokemonInput.addEventListener('keypress', async (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault(); // Prevenir la acción por defecto
+
+    // Obtener las sugerencias actuales
+    const suggestions = document.querySelectorAll('.suggestion');
+
+    // Verificar si hay una sugerencia resaltada
+    if (highlightedIndex >= 0 && highlightedIndex < suggestions.length) {
+      const selectedSuggestion = suggestions[highlightedIndex];
+      pokemonInput.value = selectedSuggestion.textContent; // Actualizar el valor del input con la sugerencia seleccionada
+      suggestionsContainer.innerHTML = ''; // Limpiar sugerencias después de seleccionar una
+      highlightedIndex = -1; // Reiniciar el índice de sugerencia resaltada
+
+      // Llamar a la función para manejar la búsqueda del Pokémon
+      await handlePokemonSearch(selectedSuggestion.textContent);
+    } else {
+      // Si no hay sugerencia resaltada, realizar la búsqueda con el valor actual del input
+      await searchAndClear();
+    }
+  }
+});
 // SUGERENCIAS DE POKEMON // 
 pokemonInput.addEventListener('input', async () => {
   const searchTerm = pokemonInput.value.trim().toLowerCase();
@@ -652,9 +715,22 @@ const renderSuggestions = (suggestions) => {
     });
   });
 };
-// Agrega un evento de clic al botón de búsqueda
-searchButton.addEventListener('click', () => {
+
+const clearInput = () => {
   // Limpia el contenido del input
   pokemonInput.value = '';
   suggestionsContainer.innerHTML = ''; // Limpiar sugerencias después de seleccionar una
+}
+
+// Agrega un evento de clic al botón de búsqueda
+searchButton.addEventListener('click', () => {
+  clearInput()
 });
+// Agrega un evento de clic al botón de búsqueda
+pokemonInput.addEventListener('keypress', (event) => {
+  // Limpia el contenido del input
+  if(event.key === 'Enter'){
+    clearInput()
+  }
+});
+

@@ -52,3 +52,12 @@ CONJUNTO
 - Arreglar tiempos de carga
 - Añadir el sprite suelo pelea pokemon rojo fuego
 - Al final del todo el manejo de las evoluciones extrañas
+
+
+- Pokedex global
+  - Filtrar por Pokedex regional
+  - Cartas de los pokemons con el efecto hover de star wars
+  - Filtrar por nombre(nPokedex) y tipos
+  - Hacer click y que se abra la carta grande
+  - Añadir a la carta grande un botón de retroceso a la página principal
+  
