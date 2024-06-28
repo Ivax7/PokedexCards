@@ -1,0 +1,14 @@
+/* Colors template */
+:root {
+  --grass-green: #4CAF50;
+  --fire-red: #FF6347;
+  --dark-fire-red: #d62e2e;
+  --water-blue: #1E90FF;
+  --dark-blue: #034d92;
+  --electric-yellow: #FFD700;
+  --steel-grey: #B0C4DE;
+  --ground-brown: #8B4513;
+  --light-blue: #cee7f9;
+  --light-gray: #eeeeeecc;
+  --dark-gray: #616161c5;
+}
