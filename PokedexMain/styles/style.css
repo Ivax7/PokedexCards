@@ -63,11 +63,7 @@ body {
   text-align: center;
   align-items: center;
 }
-/* Links */
-a {
-  text-decoration: none;
-  color: var(--dark-gray);
-}
+
 
 /* Titulo generations*/
 .navigation-bar-text{
@@ -94,7 +90,7 @@ a {
 .navigation-bar {
   position: absolute;
   width: 97%;
-  margin-top: 50px;
+  margin-top: 52px;
   list-style: none;
   max-height: 0; /* Ocultar elementos inicialmente */
   overflow: hidden;
@@ -111,21 +107,21 @@ a {
 
 /* Cada elemento generation */
 .generation {
+  position: relative;
   padding: 8px;
   border-bottom: 1px solid black;
   font-weight: bold;
   font-size: 12px;
+  height: 35px;
   transition: all .2s ease-in-out;
   cursor: pointer;
-  background: var(--light-gray)
+  background: var(--light-gray);
+  filter: brightness(0.9);
+
 }
 
 .generation:hover {
-  background: var(--dark-gray);
-}
-
-.generation:hover a {
-  color: var(--light-gray);
+  filter: brightness(1.2);
 }
 
 .generation:last-child {
@@ -137,7 +133,26 @@ a {
   background: var(--dark-fire-red);
   color: var(--light-blue);
 }
-/* Estilos existentes */
+
+/* Links */
+a {
+  text-decoration: none;
+  color: black;
+  border: 1px solid white;
+  background-color: #c0c0c0cb;
+  padding: 2px 5px;
+  left: 2px;
+  position: absolute;
+  top: 50%; /* Centrado horizontalmente */
+  transform: translateY(-50%);
+}
+
+.gen1{
+  background-image: url('/PokedexMain/images/gen1.png');
+  background-size: contain;
+}
+
+/* Numero de pokemons */
 .number-of-pokemons {
   text-align: center;
   font-size: 18px;
@@ -335,7 +350,7 @@ a {
 
 .pokemons-image {
   position: absolute;
-  width: 150px;
+  width: 130px;
 }
 
 

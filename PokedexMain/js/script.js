@@ -1,65 +1,109 @@
-const pokedex = document.querySelector('.pokemons-list'); // Seleccionar el contenedor de la lista de Pokémon
+const pokedex = document.querySelector('.pokemons-list');
 const typesContainer = document.querySelector('.types-types');
+const numberOfPokemons = document.querySelector('.number-of-pokemons-number');
+let pokeData = [];
+let tiposData = [];
 
-// Lista de pokemons
-let pokeData = []; // Array para almacenar todos los datos de los Pokémon
-let tiposData = []; // Variable para almacenar los datos del JSON externo
-
-const fetchPokemon = async () => {
-  try {
-    // Obtener los datos del JSON externo
-    const tablaTipos = await fetch('../../SingleCards/tablaTipos.json');
-    if (!tablaTipos.ok) {
-      throw new Error(`Error al cargar el archivo JSON de tipos. Status: ${tablaTipos.status}`);
-    }
-    tiposData = await tablaTipos.json();
-
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151'); // Limitamos a los primeros 151 Pokémon
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    const pokemonList = data.results;
-
-    // Iterar sobre la lista de Pokémon y obtener la información de cada uno
-    for (let i = 0; i < pokemonList.length; i++) {
-      const pokemonUrl = pokemonList[i].url;
-      const pokemonResponse = await fetch(pokemonUrl);
-      if (!pokemonResponse.ok) {
-        throw new Error(`HTTP error! Status: ${pokemonResponse.status}`);
-      }
-      const pokemonData = await pokemonResponse.json();
-      pokeData.push(pokemonData);
-
-      // Llamar a la función updateInfo para agregar cada Pokémon a la pokedex
-      updateInfo(pokemonData);
-    }
-
-    console.log('Datos de todos los Pokémon:', pokeData);
-
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
+const generations = {
+  1: { start: 1, end: 151 },
+  2: { start: 152, end: 251 },
+  3: { start: 252, end: 386 },
+  4: { start: 387, end: 493 },
+  5: { start: 494, end: 649 },
+  6: { start: 650, end: 721 },
+  7: { start: 722, end: 809 },
+  8: { start: 810, end: 898 },
+  9: { start: 899, end: 1010 },
+  10: { start: 1011, end: 1110 }
 };
 
-// Llamar a la función para iniciar la obtención de datos
-fetchPokemon();
+const saveToCache = (key, data) => {
+  localStorage.setItem(key, JSON.stringify(data));
+};
 
-// FUNCIÓN PARA INSERTAR DATOS HTML
+const loadFromCache = (key) => {
+  const data = localStorage.getItem(key);
+  return data ? JSON.parse(data) : null;
+};
+
+const fetchPokemonBatch = async (start, end) => {
+  const cacheKey = `pokemon_${start}_${end}`;
+  let pokemonData = loadFromCache(cacheKey);
+  if (!pokemonData) {
+    try {
+      const pokemonPromises = [];
+      for (let id = start; id <= end; id++) {
+        pokemonPromises.push(fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(res => res.json()));
+      }
+      pokemonData = await Promise.all(pokemonPromises);
+      
+      // Simplificar datos antes de guardar en caché
+      const simplifiedData = pokemonData.map(pokemon => ({
+        id: pokemon.id,
+        name: pokemon.name,
+        types: pokemon.types,
+        sprites: pokemon.sprites ? pokemon.sprites.front_default : null // Asegurar que siempre se guarda el sprite
+      }));
+      saveToCache(cacheKey, simplifiedData); // Guardar datos simplificados en el caché
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+  pokeData = []; // Limpiar datos antiguos
+  pokeData.push(...pokemonData);
+  displayPokemon(pokemonData);
+};
+
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const response = await fetch('../../SingleCards/tablaTipos.json');
+    const tiposJson = await response.json();
+    tiposData = tiposJson.tipos;
+
+    tiposJson.tipos.forEach(type => {
+      const img = document.createElement('img');
+      img.classList.add('types-img', type.nombre);
+      img.src = type.logo;
+      img.alt = type.nombre;
+      typesContainer.appendChild(img);
+    });
+
+    await fetchPokemonBatch(1, 151); // Cargar la primera generación por defecto
+  } catch (error) {
+    console.error('Error fetching or parsing JSON:', error);
+  }
+});
+
+const displayPokemon = (pokemonArray) => {
+  pokedex.innerHTML = ''; // Limpiar la lista de Pokémon
+  pokemonArray.forEach(pokemonData => {
+    updateInfo(pokemonData);
+  });
+  
+  // Actualizar el número de Pokémones mostrados
+  numberOfPokemons.textContent = pokemonArray.length;
+};
+
 const updateInfo = (pokemonData) => {
-// Encontrar los tipos correspondientes en tiposData y obtener el logo
-const typesImages = pokemonData.types.map(type => {
-    const typeInfo = tiposData.tipos.find(t => t.nombre === type.type.name);
+  const typesImages = pokemonData.types.map(type => {
+    const typeInfo = tiposData.find(t => t.nombre === type.type.name);
     if (typeInfo) {
       return `<img class="pokemons-types pokemons-types-${type.type.name}" 
                     src="${typeInfo.logo}" 
                     alt="${type.type.name}" 
-                    dataset="${type.type.name}">`;
+                    data-type="${type.type.name}">`;
     }
-    return ''; // Si no se encuentra el tipo, devolver cadena vacía
+    return '';
   }).join('');
 
-  // Crear el HTML para cada Pokémon y agregarlo al innerHTML de pokedex
+  // Determinar qué URL de sprite utilizar
+  let spriteUrl = '';
+  if (pokemonData.sprites && pokemonData.sprites.front_default) {
+    spriteUrl = pokemonData.sprites.front_default; // Para generaciones 9 y 10
+  } else if (pokemonData.sprites) {
+    spriteUrl = pokemonData.sprites; // Para generaciones 1-8 (siempre y cuando exista)
+  }
+
   pokedex.innerHTML += `
     <section class="pokemons-container">
       <div class="pokemons-container-header">
@@ -69,30 +113,21 @@ const typesImages = pokemonData.types.map(type => {
       </div>
       <div class="image-container">
         <img class="pokemons-image" 
-          src="${pokemonData.sprites.front_default}" 
+          src="${spriteUrl}" 
           alt="${pokemonData.name}">
       </div>
     </section>
   `;
 };
 
-// INYECCIÓN DE LOS LOGOS TIPOS
-document.addEventListener('DOMContentLoaded', async () => {
-  try {
-    const response = await fetch('../../SingleCards/tablaTipos.json');
-    const tiposJson = await response.json();
+const filterByGeneration = async (generation) => {
+  const { start, end } = generations[generation];
+  await fetchPokemonBatch(start, end);
+};
 
-    const typesContainer = document.querySelector('.types-types');
-
-    // Iterar sobre los datos de tipos y añadir las imágenes
-    tiposJson.tipos.forEach(type => {
-      const img = document.createElement('img');
-      img.classList.add('types-img', type.nombre);
-      img.src = type.logo;
-      img.alt = type.nombre;
-      typesContainer.appendChild(img);
-    });
-  } catch (error) {
-    console.error('Error fetching or parsing JSON:', error);
+document.addEventListener('DOMContentLoaded', () => {
+  for (let gen = 1; gen <= 10; gen++) {
+    document.querySelector(`.gen${gen}`).addEventListener('click', () => filterByGeneration(gen));
   }
+  document.querySelector('.allGenerations').addEventListener('click', () => displayPokemon(pokeData));
 });
