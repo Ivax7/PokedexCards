@@ -53,7 +53,7 @@ CONJUNTO
   - Hacer click y que se abra la carta grande
   - Añadir a la carta grande un botón de retroceso a la página principal
   - Poner layers de las generaciones de background en los links
-  - Hacerlo responsible
+  - Hacerlo responsibe
   - Ver lista (clicando en el número de pokemons y que se abra un modal vertical)
 
 
@@ -66,7 +66,16 @@ CONJUNTO
     - Añadir buscador a la altura de types y generation (a la derecha) ✅
   - Conectar PokeAPI
     - Información pokemons✅
-    - nro pokemons
-    - tipos 
-    - generaciones
+    - nro pokemons✅
+    - tipos ✅
+    - generaciones✅
+  - Filtrar por tipos ✅
+  - Filtrar por nombres
+    - Añadir mini etiquetas para poder hacer click en la crucecita y que se vaya el nombre del pokemon
+  - Arreglar all pokemons
+  - Arreglar tamaño 
+  - Navegar entre suggestions con las flechas
+  - Click fuera de suggestions y que se cierre
   - 3 filas + Crear el elemento de ver más(MIRAR EFECTO en yt)
+  - Corregir las clases para uniformidad de formato
+

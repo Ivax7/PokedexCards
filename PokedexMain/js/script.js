@@ -1,8 +1,13 @@
 const pokedex = document.querySelector('.pokemons-list');
 const typesContainer = document.querySelector('.types-types');
 const numberOfPokemons = document.querySelector('.number-of-pokemons-number');
+const pokemonInput = document.querySelector('.search__input');
+const suggestionsContainer = document.querySelector('.suggestions-container');
+const searchButton = document.querySelector('.search__button');
 let pokeData = [];
 let tiposData = [];
+let selectedTypes = []; // Lista de tipos seleccionados
+let selectedGeneration = 1; // Generación seleccionada
 
 const generations = {
   1: { start: 1, end: 151 },
@@ -51,7 +56,7 @@ const fetchPokemonBatch = async (start, end) => {
   }
   pokeData = []; // Limpiar datos antiguos
   pokeData.push(...pokemonData);
-  displayPokemon(pokemonData);
+  filterAndDisplayPokemon();
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -65,14 +70,29 @@ document.addEventListener('DOMContentLoaded', async () => {
       img.classList.add('types-img', type.nombre);
       img.src = type.logo;
       img.alt = type.nombre;
+      // Manejar el evento de click en los tipos
+      img.addEventListener('click', () => {
+        img.classList.toggle('active'); // Añadimos una clase
+        toggleSelectedType(type.nombre); // Lógica del manejo de types
+        filterAndDisplayPokemon();
+      });
       typesContainer.appendChild(img);
     });
 
-    await fetchPokemonBatch(1, 151); // Cargar la primera generación por defecto
+    await fetchPokemonBatch(generations[selectedGeneration].start, generations[selectedGeneration].end);
   } catch (error) {
     console.error('Error fetching or parsing JSON:', error);
   }
 });
+
+const toggleSelectedType = (type) => {
+  const index = selectedTypes.indexOf(type);
+  if (index === -1) { // Lo añade al array
+    selectedTypes.push(type);
+  } else { // Lo elimina si lo encuentra
+    selectedTypes.splice(index, 1);
+  }
+};
 
 const displayPokemon = (pokemonArray) => {
   pokedex.innerHTML = ''; // Limpiar la lista de Pokémon
@@ -120,14 +140,116 @@ const updateInfo = (pokemonData) => {
   `;
 };
 
+const filterAndDisplayPokemon = () => {
+  let filteredPokemon = pokeData;
+
+  if (selectedTypes.length > 0) {
+    filteredPokemon = filteredPokemon.filter(pokemon =>
+      selectedTypes.every(type => pokemon.types.some(pokeType => pokeType.type.name === type))
+    );
+  }
+
+  displayPokemon(filteredPokemon);
+};
+
 const filterByGeneration = async (generation) => {
-  const { start, end } = generations[generation];
-  await fetchPokemonBatch(start, end);
+  selectedGeneration = generation;
+  await fetchPokemonBatch(generations[generation].start, generations[generation].end);
 };
 
 document.addEventListener('DOMContentLoaded', () => {
   for (let gen = 1; gen <= 10; gen++) {
     document.querySelector(`.gen${gen}`).addEventListener('click', () => filterByGeneration(gen));
   }
-  document.querySelector('.allGenerations').addEventListener('click', () => displayPokemon(pokeData));
+  document.querySelector('.allGenerations').addEventListener('click', () => {
+    selectedGeneration = null;
+    filterAndDisplayPokemon();
+  });
+});
+
+// SUGERENCIAS DE POKEMON
+pokemonInput.addEventListener('input', async () => {
+  const searchTerm = pokemonInput.value.trim().toLowerCase();
+
+  if (searchTerm === '') {
+    suggestionsContainer.innerHTML = ''; // Limpiar sugerencias si no hay término de búsqueda
+    return;
+  }
+
+  try {
+    const suggestions = await getPokemonSuggestions(searchTerm); // pasamos a otra funcion el nombre que estamos escribiendo
+    if (suggestions.length > 0) {
+      renderSuggestions(suggestions);
+    } else {
+      suggestionsContainer.innerHTML = '';
+    }
+  } catch (error) {
+    console.error('Error al obtener sugerencias de Pokémon:', error);
+    suggestionsContainer.innerHTML = '<p>Error al cargar sugerencias</p>';
+  }
+});
+
+const getPokemonSuggestions = async (searchTerm) => {
+  try {
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=2000'); // Obtener hasta 2000 Pokémon
+    if (!response.ok) {
+      throw new Error('No se pudo obtener la lista de Pokémon');
+    }
+    const data = await response.json();
+    const pokemonNames = data.results.map(pokemon => pokemon.name);
+
+    const filteredSuggestions = pokemonNames.filter(name => name.startsWith(searchTerm));
+    return filteredSuggestions;
+  } catch (error) {
+    console.error('Error al obtener sugerencias de Pokémon:', error);
+    return [];
+  }
+};
+
+const renderSuggestions = (suggestions) => {
+  const htmlSuggestions = suggestions.map(suggestion => `<div class="suggestion">${suggestion}</div>`).join('');
+  suggestionsContainer.innerHTML = htmlSuggestions;
+
+  // Agregar evento click a cada sugerencia
+  const suggestionElements = document.querySelectorAll('.suggestion');
+  suggestionElements.forEach(suggestion => {
+    suggestion.addEventListener('click', async () => {
+      pokemonInput.value = ''; // limpiamos el input
+      suggestionsContainer.innerHTML = ''; // Limpiar sugerencias después de seleccionar una
+      await handlePokemonSearch(suggestion.textContent);
+    });
+  });
+};
+
+const handlePokemonSearch = async (pokemonName) => {
+  try {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`);
+    if (!response.ok) {
+      throw new Error('No se pudo obtener la información del Pokémon');
+    }
+    const pokemonData = await response.json();
+    displayPokemon([pokemonData]); // Mostrar el Pokémon seleccionado
+  } catch (error) {
+    console.error('Error al obtener la información del Pokémon:', error);
+  }
+};
+
+// Función para manejar la búsqueda
+const handleSearch = async () => {
+  const searchTerm = pokemonInput.value.trim().toLowerCase(); // recoge el valor de lo escito
+  if (searchTerm) {
+    suggestionsContainer.innerHTML = ''; // Limpiar las sugerencias
+    await handlePokemonSearch(searchTerm); // Llama a la función de buscar los pokemon
+    pokemonInput.value = ''; // limpiamos el input
+  }
+};
+
+// Evento para el botón de búsqueda
+searchButton.addEventListener('click', handleSearch);
+
+// Evento para la tecla "Enter" en el input
+pokemonInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    handleSearch();
+  }
 });
